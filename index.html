@@ -1,359 +1,732 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Mini Field</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Mini Field</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      background: #f2f4f7;
-      color: #111;
-      padding-bottom: 85px;
-    }
+body {
+  background: #f2f4f7;
+  color: #111827;
+  padding-bottom: 85px;
+}
 
-    /* HEADER */
-    header {
-      background: #111827;
-      color: white;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 27px;
-      font-weight: 900;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+header {
+  height: 70px;
+  background: #111827;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 900;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
 
-    /* MAIN CONTENT */
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 25px 18px;
-    }
+/* ADMIN BUTTON */
+.admin-button {
+  position: absolute;
+  left: 12px;
+  background: #374151;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
 
-    .page {
-      display: none;
-    }
+/* MAIN */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 22px 16px;
+}
 
-    .page.active {
-      display: block;
-    }
+.page {
+  display: none;
+}
 
-    /* WELCOME */
-    .welcome {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-    }
+.page.active {
+  display: block;
+}
 
-    .welcome h1 {
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
+/* HOME */
+.welcome {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
 
-    .welcome p {
-      color: #555;
-      margin-bottom: 20px;
-    }
+.welcome h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
 
-    .soccer-image {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 16px;
-    }
+.welcome p {
+  color: #666;
+  margin-bottom: 20px;
+}
 
-    .arrow {
-      font-size: 55px;
-      margin-top: 10px;
-      animation: bounce 1.2s infinite;
-    }
+.soccer-image {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 16px;
+}
 
-    .arrow-text {
-      font-weight: bold;
-      font-size: 18px;
-    }
+.arrow {
+  font-size: 50px;
+  margin-top: 10px;
+  animation: bounce 1.2s infinite;
+}
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
-    }
+@keyframes bounce {
+  50% {
+    transform: translateY(10px);
+  }
+}
 
-    /* CARDS */
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,.07);
-    }
+/* CARDS */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.07);
+}
 
-    .card h2 {
-      margin-bottom: 10px;
-    }
+.card h2 {
+  margin-bottom: 15px;
+}
 
-    .team {
-      padding: 15px;
-      border-bottom: 1px solid #ddd;
-      font-weight: bold;
-    }
+.team,
+.player,
+.fixture,
+.news-item {
+  padding: 14px;
+  border-bottom: 1px solid #ddd;
+}
 
-    .team:last-child {
-      border-bottom: none;
-    }
+.team:last-child,
+.player:last-child,
+.fixture:last-child,
+.news-item:last-child {
+  border-bottom: none;
+}
 
-    .news {
-      background: #eef6ff;
-      border-left: 5px solid #2563eb;
-      padding: 18px;
-      border-radius: 10px;
-      font-size: 18px;
-      font-weight: bold;
-    }
+.empty {
+  text-align: center;
+  padding: 35px 10px;
+  color: #666;
+}
 
-    .empty {
-      text-align: center;
-      padding: 45px 15px;
-      color: #666;
-      font-size: 18px;
-    }
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: #111827;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 30;
+  overflow-x: auto;
+}
 
-    /* BOTTOM NAVIGATION */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 75px;
-      background: #111827;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 20;
-      box-shadow: 0 -4px 15px rgba(0,0,0,.15);
-    }
+.nav-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 65px;
+}
 
-    .nav-btn {
-      background: none;
-      border: none;
-      color: #9ca3af;
-      font-size: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 8px 5px;
-    }
+.nav-btn span {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 3px;
+}
 
-    .nav-btn span {
-      display: block;
-      font-size: 22px;
-      margin-bottom: 3px;
-    }
+.nav-btn.active {
+  color: white;
+}
 
-    .nav-btn.active {
-      color: white;
-    }
+/* ADMIN PANEL */
+.admin-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  z-index: 100;
+  overflow-y: auto;
+  padding: 20px;
+}
 
-    /* MOBILE */
-    @media (max-width: 600px) {
-      header {
-        font-size: 22px;
-      }
+.admin-box {
+  background: white;
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 20px;
+  padding: 22px;
+}
 
-      .soccer-image {
-        height: 260px;
-      }
+.admin-box h2 {
+  margin-bottom: 18px;
+}
 
-      .bottom-nav {
-        height: 72px;
-      }
+.admin-box input,
+.admin-box select {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
 
-      .nav-btn {
-        font-size: 10px;
-      }
+.admin-box button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-      .nav-btn span {
-        font-size: 19px;
-      }
-    }
-  </style>
+.close-admin {
+  background: #dc2626 !important;
+}
+
+.admin-section {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #ddd;
+}
+
+@media (max-width: 600px) {
+  .soccer-image {
+    height: 250px;
+  }
+
+  header {
+    font-size: 21px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    Project Mini Field
-  </header>
+<header>
+  <button class="admin-button" onclick="openAdmin()">⚙️ Admin</button>
+  Project Mini Field
+</header>
 
-  <main>
+<main>
 
-    <!-- HOME -->
-    <section id="home" class="page active">
-      <div class="welcome">
-        <h1>Welcome to our website!</h1>
-        <p>Welcome to Project Mini Field — your home for all the latest league information.</p>
+<!-- HOME -->
+<section id="home" class="page active">
+  <div class="welcome">
+    <h1>Welcome to our website!</h1>
+    <p>
+      Welcome to Project Mini Field — your home for league information.
+    </p>
 
-        <img
-          class="soccer-image"
-          src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80"
-          alt="Guy playing soccer"
-        >
+    <img
+      class="soccer-image"
+      src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80"
+      alt="Soccer player"
+    >
 
-        <div class="arrow">⬇️</div>
-        <div class="arrow-text">
-          Select one of the options below
-        </div>
-      </div>
-    </section>
+    <div class="arrow">⬇️</div>
+    <b>Select one of the options below</b>
+  </div>
+</section>
 
-    <!-- PLAYERS -->
-    <section id="players" class="page">
-      <div class="card">
-        <h2>Players</h2>
-        <div class="empty">
-          Player information will be available soon.
-        </div>
-      </div>
-    </section>
+<!-- PLAYERS -->
+<section id="players" class="page">
+  <div class="card">
+    <h2>Players</h2>
+    <div id="playersList"></div>
+  </div>
+</section>
 
-    <!-- TEAMS -->
-    <section id="teams" class="page">
-      <div class="card">
-        <h2>Teams</h2>
+<!-- TEAMS -->
+<section id="teams" class="page">
+  <div class="card">
+    <h2>Teams</h2>
+    <div id="teamsList"></div>
+  </div>
+</section>
 
-        <div class="team">⚽ Elijah United</div>
-        <div class="team">⚽ Jaylen Football Club</div>
-        <div class="team">⚽ Alex Soccer Academy</div>
-        <div class="team">⚽ Zacks Soccer Club</div>
-        <div class="team">⚽ Luke Dynam FC</div>
+<!-- STANDINGS -->
+<section id="standings" class="page">
+  <div class="card">
+    <h2>Standings</h2>
+    <div class="empty">
+      🏆 The league has not started yet.<br><br>
+      Check back later!
+    </div>
+  </div>
+</section>
 
-      </div>
-    </section>
+<!-- NEWS -->
+<section id="news" class="page">
+  <div class="card">
+    <h2>News</h2>
+    <div id="newsList"></div>
+  </div>
+</section>
 
-    <!-- STANDINGS -->
-    <section id="standings" class="page">
-      <div class="card">
-        <h2>Standings</h2>
+<!-- GAMES -->
+<section id="games" class="page">
+  <div class="card">
+    <h2>Games</h2>
+    <div id="gamesList"></div>
+  </div>
+</section>
 
-        <div class="empty">
-          🏆 The league has not started yet.<br><br>
-          Check back later!
-        </div>
-      </div>
-    </section>
+<!-- SCHEDULE -->
+<section id="schedule" class="page">
+  <div class="card">
+    <h2>Schedule</h2>
+    <div id="scheduleList"></div>
+  </div>
+</section>
 
-    <!-- NEWS -->
-    <section id="news" class="page">
-      <div class="card">
-        <h2>News</h2>
+</main>
 
-        <div class="news">
-          📰 Project Mini Field has began construction.
-        </div>
-      </div>
-    </section>
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
 
-    <!-- GAMES -->
-    <section id="games" class="page">
-      <div class="card">
-        <h2>Games</h2>
+<button class="nav-btn active" onclick="showPage('home',this)">
+<span>🏠</span>Home
+</button>
 
-        <div class="empty">
-          ⚽ No games have been scheduled yet.
-        </div>
-      </div>
-    </section>
+<button class="nav-btn" onclick="showPage('players',this)">
+<span>👤</span>Players
+</button>
 
-    <!-- SCHEDULE -->
-    <section id="schedule" class="page">
-      <div class="card">
-        <h2>Schedule</h2>
+<button class="nav-btn" onclick="showPage('teams',this)">
+<span>⚽</span>Teams
+</button>
 
-        <div class="empty">
-          📅 The schedule will be posted here once the league begins.
-        </div>
-      </div>
-    </section>
+<button class="nav-btn" onclick="showPage('standings',this)">
+<span>🏆</span>Standings
+</button>
 
-  </main>
+<button class="nav-btn" onclick="showPage('news',this)">
+<span>📰</span>News
+</button>
 
-  <!-- BOTTOM NAVIGATION -->
-  <nav class="bottom-nav">
+<button class="nav-btn" onclick="showPage('games',this)">
+<span>🎮</span>Games
+</button>
 
-    <button class="nav-btn active" onclick="showPage('home', this)">
-      <span>🏠</span>
-      Home
-    </button>
+<button class="nav-btn" onclick="showPage('schedule',this)">
+<span>📅</span>Schedule
+</button>
 
-    <button class="nav-btn" onclick="showPage('players', this)">
-      <span>👤</span>
-      Players
-    </button>
+</nav>
 
-    <button class="nav-btn" onclick="showPage('teams', this)">
-      <span>⚽</span>
-      Teams
-    </button>
+<!-- ADMIN LOGIN / PANEL -->
+<div id="adminPanel" class="admin-panel">
 
-    <button class="nav-btn" onclick="showPage('standings', this)">
-      <span>🏆</span>
-      Standings
-    </button>
+<div class="admin-box">
 
-    <button class="nav-btn" onclick="showPage('news', this)">
-      <span>📰</span>
-      News
-    </button>
+<h2>🔐 Admin Control Panel</h2>
 
-    <button class="nav-btn" onclick="showPage('games', this)">
-      <span>🎮</span>
-      Games
-    </button>
+<div id="loginArea">
+<input
+  id="passwordInput"
+  type="password"
+  placeholder="Admin password"
+>
 
-    <button class="nav-btn" onclick="showPage('schedule', this)">
-      <span>📅</span>
-      Schedule
-    </button>
+<button onclick="login()">Login</button>
+</div>
 
-  </nav>
+<div id="controls" style="display:none">
 
-  <script>
-    function showPage(pageId, button) {
+<!-- ADD PLAYER -->
+<div class="admin-section">
+<h3>👤 Add Player</h3>
 
-      // Hide every page
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
+<input id="playerName" placeholder="Player name">
 
-      // Show selected page
-      document.getElementById(pageId).classList.add('active');
+<button onclick="addPlayer()">
+Add Player
+</button>
+</div>
 
-      // Remove active from all buttons
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
+<!-- ADD TEAM -->
+<div class="admin-section">
+<h3>⚽ Add Team</h3>
 
-      // Highlight selected button
-      button.classList.add('active');
+<input id="teamName" placeholder="Team name">
 
-      // Scroll to top
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  </script>
+<button onclick="addTeam()">
+Add Team
+</button>
+</div>
+
+<!-- ADD FIXTURE -->
+<div class="admin-section">
+<h3>📅 Create Fixture</h3>
+
+<input id="homeTeam" placeholder="Home team">
+
+<input id="awayTeam" placeholder="Away team">
+
+<input id="gameDate" type="date">
+
+<input id="gameTime" type="time">
+
+<button onclick="addFixture()">
+Create Fixture
+</button>
+</div>
+
+<!-- ADD NEWS -->
+<div class="admin-section">
+<h3>📰 Add News</h3>
+
+<input id="newsText" placeholder="News headline">
+
+<button onclick="addNews()">
+Publish News
+</button>
+</div>
+
+<button class="close-admin" onclick="closeAdmin()">
+Close Admin Panel
+</button>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+/*
+  The password is intentionally not displayed anywhere
+  on the actual website.
+*/
+const ADMIN_PASSWORD = "1291";
+
+/* DEFAULT TEAMS */
+let teams = JSON.parse(localStorage.getItem("pmfTeams")) || [
+  "Elijah United",
+  "Jaylen Football Club",
+  "Alex Soccer Academy",
+  "Zacks Soccer Club",
+  "Luke Dynam FC"
+];
+
+let players = JSON.parse(localStorage.getItem("pmfPlayers")) || [];
+
+let fixtures = JSON.parse(localStorage.getItem("pmfFixtures")) || [];
+
+let news = JSON.parse(localStorage.getItem("pmfNews")) || [
+  "Project Mini Field has began construction."
+];
+
+/* PAGE SWITCH */
+function showPage(pageId, button) {
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById(pageId).classList.add("active");
+
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+/* ADMIN */
+function openAdmin() {
+  document.getElementById("adminPanel").style.display = "block";
+}
+
+function closeAdmin() {
+  document.getElementById("adminPanel").style.display = "none";
+}
+
+/* LOGIN */
+function login() {
+
+  const password =
+    document.getElementById("passwordInput").value;
+
+  if (password === ADMIN_PASSWORD) {
+
+    document.getElementById("loginArea").style.display = "none";
+
+    document.getElementById("controls").style.display = "block";
+
+  } else {
+
+    alert("Incorrect password.");
+
+  }
+}
+
+/* ADD PLAYER */
+function addPlayer() {
+
+  const name =
+    document.getElementById("playerName").value.trim();
+
+  if (!name) {
+    alert("Enter a player name.");
+    return;
+  }
+
+  players.push(name);
+
+  localStorage.setItem(
+    "pmfPlayers",
+    JSON.stringify(players)
+  );
+
+  document.getElementById("playerName").value = "";
+
+  renderAll();
+
+  alert("Player added!");
+}
+
+/* ADD TEAM */
+function addTeam() {
+
+  const name =
+    document.getElementById("teamName").value.trim();
+
+  if (!name) {
+    alert("Enter a team name.");
+    return;
+  }
+
+  teams.push(name);
+
+  localStorage.setItem(
+    "pmfTeams",
+    JSON.stringify(teams)
+  );
+
+  document.getElementById("teamName").value = "";
+
+  renderAll();
+
+  alert("Team added!");
+}
+
+/* ADD FIXTURE */
+function addFixture() {
+
+  const home =
+    document.getElementById("homeTeam").value.trim();
+
+  const away =
+    document.getElementById("awayTeam").value.trim();
+
+  const date =
+    document.getElementById("gameDate").value;
+
+  const time =
+    document.getElementById("gameTime").value;
+
+  if (!home || !away || !date || !time) {
+    alert("Fill in all fixture information.");
+    return;
+  }
+
+  fixtures.push({
+    home: home,
+    away: away,
+    date: date,
+    time: time
+  });
+
+  localStorage.setItem(
+    "pmfFixtures",
+    JSON.stringify(fixtures)
+  );
+
+  document.getElementById("homeTeam").value = "";
+  document.getElementById("awayTeam").value = "";
+
+  renderAll();
+
+  alert("Fixture created!");
+}
+
+/* ADD NEWS */
+function addNews() {
+
+  const text =
+    document.getElementById("newsText").value.trim();
+
+  if (!text) {
+    alert("Enter some news.");
+    return;
+  }
+
+  news.unshift(text);
+
+  localStorage.setItem(
+    "pmfNews",
+    JSON.stringify(news)
+  );
+
+  document.getElementById("newsText").value = "";
+
+  renderAll();
+
+  alert("News published!");
+}
+
+/* RENDER EVERYTHING */
+function renderAll() {
+
+  /* PLAYERS */
+
+  const playersList =
+    document.getElementById("playersList");
+
+  if (players.length === 0) {
+
+    playersList.innerHTML =
+      '<div class="empty">No players added yet.</div>';
+
+  } else {
+
+    playersList.innerHTML =
+      players.map(player =>
+        `<div class="player">👤 ${escapeHTML(player)}</div>`
+      ).join("");
+
+  }
+
+  /* TEAMS */
+
+  const teamsList =
+    document.getElementById("teamsList");
+
+  teamsList.innerHTML =
+    teams.map(team =>
+      `<div class="team">⚽ ${escapeHTML(team)}</div>`
+    ).join("");
+
+  /* NEWS */
+
+  const newsList =
+    document.getElementById("newsList");
+
+  newsList.innerHTML =
+    news.map(item =>
+      `<div class="news-item">📰 ${escapeHTML(item)}</div>`
+    ).join("");
+
+  /* GAMES */
+
+  const gamesList =
+    document.getElementById("gamesList");
+
+  if (fixtures.length === 0) {
+
+    gamesList.innerHTML =
+      '<div class="empty">⚽ No games have been scheduled yet.</div>';
+
+  } else {
+
+    gamesList.innerHTML =
+      fixtures.map(game =>
+        `<div class="fixture">
+          <b>${escapeHTML(game.home)}</b>
+          vs
+          <b>${escapeHTML(game.away)}</b>
+          <br>
+          ${escapeHTML(game.date)} at ${escapeHTML(game.time)}
+        </div>`
+      ).join("");
+
+  }
+
+  /* SCHEDULE */
+
+  const scheduleList =
+    document.getElementById("scheduleList");
+
+  if (fixtures.length === 0) {
+
+    scheduleList.innerHTML =
+      '<div class="empty">📅 No fixtures scheduled yet.</div>';
+
+  } else {
+
+    scheduleList.innerHTML =
+      fixtures.map(game =>
+        `<div class="fixture">
+          📅 ${escapeHTML(game.date)}
+          <br>
+          ⏰ ${escapeHTML(game.time)}
+          <br><br>
+          ⚽ ${escapeHTML(game.home)}
+          vs
+          ${escapeHTML(game.away)}
+        </div>`
+      ).join("");
+
+  }
+}
+
+/* SECURITY FOR USER-ENTERED TEXT */
+function escapeHTML(text) {
+
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+/* LOAD DATA */
+renderAll();
+
+</script>
 
 </body>
 </html>
