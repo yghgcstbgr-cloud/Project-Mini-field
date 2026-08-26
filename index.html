@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Mini Field</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f4f7;
+      color: #111;
+      padding-bottom: 85px;
+    }
+
+    /* HEADER */
+    header {
+      background: #111827;
+      color: white;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+      font-weight: 900;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 18px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* WELCOME */
+    .welcome {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .welcome h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .soccer-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .arrow {
+      font-size: 55px;
+      margin-top: 10px;
+      animation: bounce 1.2s infinite;
+    }
+
+    .arrow-text {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* CARDS */
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.07);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .team {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+    }
+
+    .team:last-child {
+      border-bottom: none;
+    }
+
+    .news {
+      background: #eef6ff;
+      border-left: 5px solid #2563eb;
+      padding: 18px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 45px 15px;
+      color: #666;
+      font-size: 18px;
+    }
+
+    /* BOTTOM NAVIGATION */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      background: #111827;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 20;
+      box-shadow: 0 -4px 15px rgba(0,0,0,.15);
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 8px 5px;
+    }
+
+    .nav-btn span {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+
+    .nav-btn.active {
+      color: white;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      header {
+        font-size: 22px;
+      }
+
+      .soccer-image {
+        height: 260px;
+      }
+
+      .bottom-nav {
+        height: 72px;
+      }
+
+      .nav-btn {
+        font-size: 10px;
+      }
+
+      .nav-btn span {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    Project Mini Field
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="welcome">
+        <h1>Welcome to our website!</h1>
+        <p>Welcome to Project Mini Field — your home for all the latest league information.</p>
+
+        <img
+          class="soccer-image"
+          src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80"
+          alt="Guy playing soccer"
+        >
+
+        <div class="arrow">⬇️</div>
+        <div class="arrow-text">
+          Select one of the options below
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAYERS -->
+    <section id="players" class="page">
+      <div class="card">
+        <h2>Players</h2>
+        <div class="empty">
+          Player information will be available soon.
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAMS -->
+    <section id="teams" class="page">
+      <div class="card">
+        <h2>Teams</h2>
+
+        <div class="team">⚽ Elijah United</div>
+        <div class="team">⚽ Jaylen Football Club</div>
+        <div class="team">⚽ Alex Soccer Academy</div>
+        <div class="team">⚽ Zacks Soccer Club</div>
+        <div class="team">⚽ Luke Dynam FC</div>
+
+      </div>
+    </section>
+
+    <!-- STANDINGS -->
+    <section id="standings" class="page">
+      <div class="card">
+        <h2>Standings</h2>
+
+        <div class="empty">
+          🏆 The league has not started yet.<br><br>
+          Check back later!
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="page">
+      <div class="card">
+        <h2>News</h2>
+
+        <div class="news">
+          📰 Project Mini Field has began construction.
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <section id="games" class="page">
+      <div class="card">
+        <h2>Games</h2>
+
+        <div class="empty">
+          ⚽ No games have been scheduled yet.
+        </div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="schedule" class="page">
+      <div class="card">
+        <h2>Schedule</h2>
+
+        <div class="empty">
+          📅 The schedule will be posted here once the league begins.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+
+    <button class="nav-btn active" onclick="showPage('home', this)">
+      <span>🏠</span>
+      Home
+    </button>
+
+    <button class="nav-btn" onclick="showPage('players', this)">
+      <span>👤</span>
+      Players
+    </button>
+
+    <button class="nav-btn" onclick="showPage('teams', this)">
+      <span>⚽</span>
+      Teams
+    </button>
+
+    <button class="nav-btn" onclick="showPage('standings', this)">
+      <span>🏆</span>
+      Standings
+    </button>
+
+    <button class="nav-btn" onclick="showPage('news', this)">
+      <span>📰</span>
+      News
+    </button>
+
+    <button class="nav-btn" onclick="showPage('games', this)">
+      <span>🎮</span>
+      Games
+    </button>
+
+    <button class="nav-btn" onclick="showPage('schedule', this)">
+      <span>📅</span>
+      Schedule
+    </button>
+
+  </nav>
+
+  <script>
+    function showPage(pageId, button) {
+
+      // Hide every page
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+
+      // Remove active from all buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Highlight selected button
+      button.classList.add('active');
+
+      // Scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
+</body>
+</html>
