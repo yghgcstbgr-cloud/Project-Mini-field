@@ -2,1072 +2,1483 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+
 <title>Project Mini Field</title>
 
 <style>
+
 /* =========================================================
    PROJECT MINI FIELD
-   Complete single-file league website
+   ONE-FILE SOCCER WEBSITE
    ========================================================= */
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,Helvetica,sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  background:#f1f5f9;
-  color:#111827;
-  padding-bottom:90px;
+    background:#f1f5f9;
+    color:#111827;
+    padding-bottom:90px;
 }
 
-button{
-  cursor:pointer;
-}
-
-header{
-  height:70px;
-  background:#111827;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:sticky;
-  top:0;
-  z-index:50;
-  font-size:24px;
-  font-weight:900;
-  box-shadow:0 2px 10px #0003;
-}
-
-.admin-button{
-  position:absolute;
-  left:12px;
-  background:#374151;
-  color:white;
-  border:0;
-  padding:9px 12px;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-main{
-  max-width:1000px;
-  margin:auto;
-  padding:20px 15px;
-}
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.card{
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 4px 18px #00000012;
-}
-
-.hero{
-  text-align:center;
-}
-
-.hero h1{
-  font-size:34px;
-  margin-bottom:8px;
-}
-
-.hero p{
-  color:#64748b;
-  margin-bottom:18px;
-}
-
-.hero-image{
-  width:100%;
-  height:330px;
-  object-fit:cover;
-  border-radius:16px;
-}
-
-.section-title{
-  margin-bottom:15px;
-}
-
-.empty{
-  text-align:center;
-  color:#64748b;
-  padding:35px 10px;
-}
-
-.item{
-  padding:14px 5px;
-  border-bottom:1px solid #e5e7eb;
-}
-
-.item:last-child{
-  border-bottom:0;
-}
-
-.match-card{
-  background:white;
-  border:1px solid #e2e8f0;
-  border-radius:17px;
-  padding:16px;
-  margin-bottom:13px;
-}
-
-.match-status{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.status-upcoming{
-  background:#dbeafe;
-  color:#1d4ed8;
-}
-
-.status-live{
-  background:#fee2e2;
-  color:#b91c1c;
-  animation:pulse 1.5s infinite;
-}
-
-.status-half{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.status-finished{
-  background:#dcfce7;
-  color:#166534;
-}
-
-@keyframes pulse{
-  50%{opacity:.55}
-}
-
-.match-teams{
-  text-align:center;
-  font-size:19px;
-  font-weight:bold;
-}
-
-.match-score{
-  text-align:center;
-  font-size:40px;
-  font-weight:900;
-  margin:8px 0;
-}
-
-.match-date{
-  text-align:center;
-  color:#64748b;
-  font-size:13px;
-}
-
-.timer{
-  text-align:center;
-  font-size:28px;
-  font-weight:900;
-  margin:10px;
-}
-
-.event-list{
-  margin-top:12px;
-}
-
-.event{
-  background:#f8fafc;
-  border-radius:9px;
-  padding:8px;
-  margin-top:6px;
-  font-size:13px;
-}
-
-.nav{
-  position:fixed;
-  left:0;
-  bottom:0;
-  width:100%;
-  height:80px;
-  background:#111827;
-  display:flex;
-  overflow-x:auto;
-  z-index:60;
-}
-
-.nav button{
-  flex:0 0 72px;
-  border:0;
-  background:none;
-  color:#9ca3af;
-  font-size:10px;
-  font-weight:bold;
-}
-
-.nav button span{
-  display:block;
-  font-size:20px;
-  margin-bottom:4px;
-}
-
-.nav button.active{
-  color:white;
-}
-
+button,
 input,
 select,
 textarea{
-  width:100%;
-  padding:12px;
-  margin:5px 0;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  font-size:15px;
-  background:white;
+    font:inherit;
 }
 
-textarea{
-  min-height:100px;
-  resize:vertical;
+button{
+    cursor:pointer;
 }
 
-.btn{
-  border:0;
-  border-radius:9px;
-  padding:11px 13px;
-  background:#111827;
-  color:white;
-  font-weight:bold;
-  margin-top:6px;
+.hidden{
+    display:none!important;
 }
 
-.btn-green{background:#16a34a}
-.btn-red{background:#dc2626}
-.btn-orange{background:#d97706}
-.btn-blue{background:#2563eb}
-.btn-gray{background:#64748b}
+/* =========================================================
+   HEADER
+   ========================================================= */
 
-.button-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
+header{
+    height:70px;
+    background:#111827;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:900;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 12px rgba(0,0,0,.2);
 }
 
-.button-row .btn{
-  flex:1;
+.admin-button{
+    position:absolute;
+    left:12px;
+    top:14px;
+    border:0;
+    background:#374151;
+    color:white;
+    border-radius:10px;
+    padding:10px 13px;
+    font-size:13px;
+    font-weight:bold;
 }
 
-.admin-overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000b;
-  z-index:200;
-  overflow-y:auto;
-  padding:15px;
+.admin-button:hover{
+    background:#4b5563;
 }
 
-.admin-box{
-  max-width:720px;
-  background:white;
-  margin:20px auto;
-  border-radius:20px;
-  padding:22px;
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main{
+    width:100%;
+    max-width:1000px;
+    margin:auto;
+    padding:20px 15px;
 }
 
-.admin-section{
-  border-top:1px solid #e5e7eb;
-  margin-top:22px;
-  padding-top:20px;
+.page{
+    display:none;
 }
 
-.admin-section h3{
-  margin-bottom:10px;
+.page.active{
+    display:block;
 }
 
-.admin-box .btn{
-  width:100%;
+.card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:17px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
 }
 
-.close-admin{
-  background:#dc2626!important;
-  margin-top:25px!important;
+.card h2{
+    margin-bottom:17px;
 }
 
-.notice{
-  background:#eff6ff;
-  border-left:4px solid #2563eb;
-  padding:12px;
-  border-radius:8px;
-  margin-bottom:10px;
-  font-size:13px;
+/* =========================================================
+   HOME
+   ========================================================= */
+
+.welcome{
+    text-align:center;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+.welcome h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.welcome p{
+    color:#6b7280;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.soccer-image{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+.arrow{
+    font-size:44px;
+    margin:12px 0;
+    animation:bounce 1.2s infinite;
+}
+
+@keyframes bounce{
+    50%{
+        transform:translateY(9px);
+    }
+}
+
+/* =========================================================
+   HERO STATS
+   ========================================================= */
+
+.home-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
 }
 
 .stat-box{
-  background:#f8fafc;
-  border-radius:14px;
-  padding:18px;
-  text-align:center;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
 }
 
-.stat-box strong{
-  display:block;
-  font-size:28px;
-  margin-bottom:5px;
+.stat-box .number{
+    display:block;
+    font-size:26px;
+    font-weight:900;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
+.stat-box .label{
+    color:#64748b;
+    font-size:12px;
 }
 
-th,
-td{
-  padding:10px 5px;
-  border-bottom:1px solid #e5e7eb;
-  text-align:center;
-  font-size:13px;
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+.team,
+.player,
+.news-item,
+.fixture{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
 }
 
-th{
-  background:#111827;
-  color:white;
+.team:last-child,
+.player:last-child,
+.news-item:last-child,
+.fixture:last-child{
+    border-bottom:0;
 }
 
-.search{
-  margin-bottom:15px;
+.empty{
+    text-align:center;
+    color:#64748b;
+    padding:35px 10px;
 }
 
-.player-card{
-  border:1px solid #e2e8f0;
-  border-radius:14px;
-  padding:15px;
-  margin-bottom:10px;
+/* =========================================================
+   BOTTOM NAV
+   ========================================================= */
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:80px;
+    background:#111827;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    overflow-x:auto;
+    z-index:150;
+    box-shadow:0 -4px 15px rgba(0,0,0,.2);
 }
 
-.rank{
-  font-size:20px;
-  font-weight:900;
+.nav-btn{
+    min-width:75px;
+    height:70px;
+    border:0;
+    background:transparent;
+    color:#9ca3af;
+    font-size:10px;
+    font-weight:bold;
 }
 
-.media-image,
-.media-video{
-  width:100%;
-  max-height:420px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-top:8px;
+.nav-btn span{
+    display:block;
+    font-size:21px;
+    margin-bottom:4px;
 }
 
-.award{
-  padding:16px;
-  background:#f8fafc;
-  border-radius:13px;
-  margin-bottom:10px;
+.nav-btn.active{
+    color:white;
 }
+
+/* =========================================================
+   MATCH CARDS
+   ========================================================= */
+
+.match-card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.match-status{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.status-live{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.status-half{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status-final{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status-scheduled{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.match-teams{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:12px;
+    align-items:center;
+}
+
+.match-team{
+    font-size:18px;
+    font-weight:900;
+}
+
+.match-score{
+    font-size:42px;
+    font-weight:900;
+}
+
+.match-date{
+    color:#64748b;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.goal-list{
+    margin-top:17px;
+    background:#f8fafc;
+    border-radius:14px;
+    padding:13px;
+    text-align:left;
+}
+
+.goal-list-title{
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.goal-item{
+    padding:5px 0;
+    font-size:14px;
+}
+
+/* =========================================================
+   LIVE CENTER
+   ========================================================= */
+
+.live-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.live-dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#dc2626;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        opacity:.3;
+    }
+}
+
+.live-text{
+    color:#dc2626;
+    font-weight:900;
+}
+
+/* =========================================================
+   SCORERS
+   ========================================================= */
+
+.scorer{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.scorer:last-child{
+    border-bottom:0;
+}
+
+.scorer-rank{
+    width:32px;
+    font-size:21px;
+    font-weight:900;
+}
+
+.scorer-name{
+    flex:1;
+    font-weight:bold;
+}
+
+.goal-count{
+    background:#111827;
+    color:white;
+    border-radius:30px;
+    padding:6px 11px;
+    font-weight:900;
+}
+
+/* =========================================================
+   STANDINGS
+   ========================================================= */
+
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+.standings-table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+}
+
+.standings-table th,
+.standings-table td{
+    padding:11px 7px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:center;
+}
+
+.standings-table th{
+    background:#111827;
+    color:white;
+}
+
+.standings-table th:first-child,
+.standings-table td:first-child{
+    text-align:left;
+}
+
+/* =========================================================
+   HIGHLIGHTS
+   ========================================================= */
 
 .highlight{
-  border-left:4px solid #2563eb;
-  padding-left:12px;
+    background:#f8fafc;
+    border-radius:16px;
+    overflow:hidden;
+    margin-bottom:17px;
 }
 
-.small-text{
-  color:#64748b;
-  font-size:12px;
+.highlight img,
+.highlight video{
+    display:block;
+    width:100%;
+    max-height:450px;
+    object-fit:cover;
 }
+
+.highlight-info{
+    padding:15px;
+}
+
+.highlight-info h3{
+    margin-bottom:7px;
+}
+
+.highlight-info p{
+    color:#64748b;
+    line-height:1.5;
+}
+
+/* =========================================================
+   ADMIN MODAL
+   ========================================================= */
+
+.admin-panel{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    z-index:300;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.admin-box{
+    background:white;
+    max-width:760px;
+    margin:20px auto 110px;
+    border-radius:22px;
+    padding:22px;
+}
+
+.admin-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.admin-title h2{
+    margin:0;
+}
+
+.admin-section{
+    border-top:1px solid #e5e7eb;
+    margin-top:24px;
+    padding-top:21px;
+}
+
+.admin-section h3{
+    margin-bottom:8px;
+}
+
+.admin-help{
+    color:#64748b;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:10px;
+}
+
+.admin-box input,
+.admin-box select,
+.admin-box textarea{
+    width:100%;
+    padding:13px;
+    margin:6px 0;
+    border:1px solid #cbd5e1;
+    border-radius:11px;
+    background:white;
+    color:#111827;
+}
+
+.admin-box textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.admin-box button{
+    width:100%;
+    border:0;
+    border-radius:11px;
+    padding:13px;
+    margin-top:8px;
+    background:#111827;
+    color:white;
+    font-weight:900;
+}
+
+.admin-box button:hover{
+    opacity:.9;
+}
+
+.green{
+    background:#16a34a!important;
+}
+
+.red{
+    background:#dc2626!important;
+}
+
+.orange{
+    background:#d97706!important;
+}
+
+.blue{
+    background:#2563eb!important;
+}
+
+.gray{
+    background:#475569!important;
+}
+
+/* =========================================================
+   SCORE CONTROLS
+   ========================================================= */
+
+.score-box{
+    background:#f8fafc;
+    border-radius:16px;
+    padding:15px;
+    margin-top:12px;
+}
+
+.score-display{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:10px;
+    margin:12px 0;
+}
+
+.score-number{
+    font-size:32px;
+    font-weight:900;
+    text-align:center;
+}
+
+.score-team-name{
+    text-align:center;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.score-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.score-buttons button{
+    margin-top:0;
+}
+
+/* =========================================================
+   ADMIN MATCH
+   ========================================================= */
+
+.admin-match{
+    background:#f8fafc;
+    border-radius:15px;
+    padding:15px;
+    margin-top:10px;
+}
+
+.admin-match-title{
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.admin-match-meta{
+    color:#64748b;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.admin-match-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:8px;
+}
+
+.admin-match-actions button{
+    margin-top:0;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login-box{
+    max-width:400px;
+    margin:auto;
+}
+
+.login-message{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:100px;
+    transform:translateX(-50%) translateY(20px);
+    background:#111827;
+    color:white;
+    padding:13px 18px;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:14px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:500;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media(max-width:600px){
-  header{
-    font-size:20px;
-  }
 
-  .hero-image{
-    height:240px;
-  }
+    header{
+        font-size:20px;
+    }
 
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
+    .welcome h1{
+        font-size:27px;
+    }
 
-  .match-score{
-    font-size:34px;
-  }
+    .soccer-image{
+        height:250px;
+    }
+
+    .home-stats{
+        grid-template-columns:1fr;
+    }
+
+    .match-team{
+        font-size:15px;
+    }
+
+    .match-score{
+        font-size:32px;
+    }
+
+    .admin-panel{
+        padding:10px;
+    }
+
+    .admin-box{
+        margin-top:5px;
+    }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-     ===================================================== -->
+     ========================================================= -->
 
 <header>
-  <button class="admin-button" onclick="openAdmin()">⚙️ Admin</button>
-  Project Mini Field
+
+<button class="admin-button" onclick="openAdmin()">
+⚙️ Admin
+</button>
+
+Project Mini Field
+
 </header>
+
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
 <main>
 
-<!-- =====================================================
-     HOME
-     ===================================================== -->
+
+<!-- ================= HOME ================= -->
 
 <section id="home" class="page active">
 
-  <div class="card hero">
+<div class="card welcome">
 
-    <h1>⚽ Project Mini Field</h1>
+<h1>⚽ Project Mini Field</h1>
 
-    <p>
-      Welcome to the official Project Mini Field league website.
-    </p>
+<p>
+Welcome to Project Mini Field — your home for backyard soccer.
+</p>
 
-    <img
-      class="hero-image"
-      src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80"
-      alt="Soccer"
-    >
+<img
+class="soccer-image"
+src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80"
+alt="Soccer">
 
-    <br><br>
+<div class="arrow">
+⬇️
+</div>
 
-    <strong id="seasonDisplay"></strong>
+<b>
+Follow the action below!
+</b>
 
-  </div>
 
-  <div class="card">
-    <h2>🔴 Match Center</h2>
-    <div id="homeMatch"></div>
-  </div>
+<div class="home-stats">
 
-  <div class="card">
-    <h2>📰 Latest News</h2>
-    <div id="homeNews"></div>
-  </div>
+<div class="stat-box">
+<span class="number" id="homeMatches">0</span>
+<span class="label">Matches</span>
+</div>
 
-  <div class="card">
-    <h2>🏆 Current Leader</h2>
-    <div id="homeLeader"></div>
-  </div>
+<div class="stat-box">
+<span class="number" id="homeTeams">0</span>
+<span class="label">Teams</span>
+</div>
+
+<div class="stat-box">
+<span class="number" id="homePlayers">0</span>
+<span class="label">Players</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🔴 Latest Live Match</h2>
+
+<div id="homeLive"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📰 Latest News</h2>
+
+<div id="homeNews"></div>
+
+</div>
 
 </section>
 
-<!-- =====================================================
-     LIVE MATCHES
-     ===================================================== -->
+
+<!-- ================= LIVE ================= -->
 
 <section id="live" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>🔴 Live Matches</h2>
+<div class="live-header">
 
-    <div id="liveMatches"></div>
+<div class="live-dot"></div>
 
-  </div>
+<h2 style="margin:0;">
+Live Match Center
+</h2>
+
+</div>
+
+<div id="liveMatches"></div>
+
+</div>
 
 </section>
 
-<!-- =====================================================
-     MATCH RESULTS
-     ===================================================== -->
+
+<!-- ================= RESULTS ================= -->
 
 <section id="results" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>🏁 Match Results</h2>
+<h2>
+🏁 Match Results
+</h2>
 
-    <div id="results"></div>
+<div id="resultsList"></div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- =====================================================
-     PLAYERS
-     ===================================================== -->
+
+<!-- ================= PLAYERS ================= -->
 
 <section id="players" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>👤 Players</h2>
+<h2>
+👤 Players
+</h2>
 
-    <input
-      id="playerSearch"
-      class="search"
-      placeholder="Search players..."
-      oninput="renderPlayers()"
-    >
+<div id="playersList"></div>
 
-    <h3>👑 Top Scorers</h3>
-
-    <div id="topScorers"></div>
-
-    <br>
-
-    <h3>🎯 Top Assists</h3>
-
-    <div id="topAssists"></div>
-
-    <br>
-
-    <h3>👥 All Players</h3>
-
-    <div id="playersList"></div>
-
-  </div>
+</div>
 
 </section>
 
-<!-- =====================================================
-     TEAMS
-     ===================================================== -->
+
+<!-- ================= SCORERS ================= -->
+
+<section id="scorers" class="page">
+
+<div class="card">
+
+<h2>
+🥇 Top Scorers
+</h2>
+
+<div id="scorersList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TEAMS ================= -->
 
 <section id="teams" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>⚽ Teams</h2>
+<h2>
+⚽ Teams
+</h2>
 
-    <div id="teamsList"></div>
+<div id="teamsList"></div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- =====================================================
-     STANDINGS
-     ===================================================== -->
+
+<!-- ================= STANDINGS ================= -->
 
 <section id="standings" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>🏆 League Standings</h2>
+<h2>
+🏆 League Standings
+</h2>
 
-    <div id="standingsTable"></div>
+<div class="table-wrap">
 
-  </div>
+<table class="standings-table">
+
+<thead>
+
+<tr>
+
+<th>Team</th>
+<th>P</th>
+<th>W</th>
+<th>D</th>
+<th>L</th>
+<th>GF</th>
+<th>GA</th>
+<th>GD</th>
+<th>Pts</th>
+
+</tr>
+
+</thead>
+
+<tbody id="standingsList"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
-<!-- =====================================================
-     FIXTURES
-     ===================================================== -->
 
-<section id="fixtures" class="page">
-
-  <div class="card">
-
-    <h2>📅 Fixtures</h2>
-
-    <div id="fixturesList"></div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     NEWS
-     ===================================================== -->
+<!-- ================= NEWS ================= -->
 
 <section id="news" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>📰 News</h2>
+<h2>
+📰 News
+</h2>
 
-    <div id="newsList"></div>
+<div id="newsList"></div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- =====================================================
-     HIGHLIGHTS
-     ===================================================== -->
+
+<!-- ================= GAMES ================= -->
+
+<section id="games" class="page">
+
+<div class="card">
+
+<h2>
+🎮 Games
+</h2>
+
+<div id="gamesList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SCHEDULE ================= -->
+
+<section id="schedule" class="page">
+
+<div class="card">
+
+<h2>
+📅 Schedule
+</h2>
+
+<div id="scheduleList"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= HIGHLIGHTS ================= -->
 
 <section id="highlights" class="page">
 
-  <div class="card">
+<div class="card">
 
-    <h2>📸 Highlights</h2>
+<h2>
+🎥 Photos & Highlights
+</h2>
 
-    <div id="mediaList"></div>
+<div id="highlightsList"></div>
 
-  </div>
-
-</section>
-
-<!-- =====================================================
-     STATISTICS
-     ===================================================== -->
-
-<section id="statistics" class="page">
-
-  <div class="card">
-
-    <h2>📊 League Statistics</h2>
-
-    <div id="statistics"></div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     AWARDS
-     ===================================================== -->
-
-<section id="awards" class="page">
-
-  <div class="card">
-
-    <h2>🏅 Awards</h2>
-
-    <div id="awardsList"></div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     MATCHDAY
-     ===================================================== -->
-
-<section id="matchday" class="page">
-
-  <div class="card">
-
-    <h2>🏟️ Matchday Hub</h2>
-
-    <div id="matchday"></div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     HISTORY
-     ===================================================== -->
-
-<section id="history" class="page">
-
-  <div class="card">
-
-    <h2>📚 Season History</h2>
-
-    <div id="history"></div>
-
-  </div>
+</div>
 
 </section>
 
 </main>
 
-<!-- =====================================================
-     BOTTOM NAVIGATION
-     ===================================================== -->
 
-<nav class="nav">
+<!-- =========================================================
+     BOTTOM NAV
+     ========================================================= -->
 
-<button class="active" onclick="showPage('home',this)">
+<nav class="bottom-nav">
+
+<button class="nav-btn active"
+onclick="showPage('home',this)">
 <span>🏠</span>
 Home
 </button>
 
-<button onclick="showPage('live',this)">
+<button class="nav-btn"
+onclick="showPage('live',this)">
 <span>🔴</span>
 Live
 </button>
 
-<button onclick="showPage('results',this)">
+<button class="nav-btn"
+onclick="showPage('results',this)">
 <span>🏁</span>
 Results
 </button>
 
-<button onclick="showPage('players',this)">
+<button class="nav-btn"
+onclick="showPage('players',this)">
 <span>👤</span>
 Players
 </button>
 
-<button onclick="showPage('teams',this)">
+<button class="nav-btn"
+onclick="showPage('scorers',this)">
+<span>🥇</span>
+Scorers
+</button>
+
+<button class="nav-btn"
+onclick="showPage('teams',this)">
 <span>⚽</span>
 Teams
 </button>
 
-<button onclick="showPage('standings',this)">
+<button class="nav-btn"
+onclick="showPage('standings',this)">
 <span>🏆</span>
-Table
+Standings
 </button>
 
-<button onclick="showPage('fixtures',this)">
-<span>📅</span>
-Fixtures
-</button>
-
-<button onclick="showPage('news',this)">
+<button class="nav-btn"
+onclick="showPage('news',this)">
 <span>📰</span>
 News
 </button>
 
-<button onclick="showPage('highlights',this)">
-<span>📸</span>
+<button class="nav-btn"
+onclick="showPage('games',this)">
+<span>🎮</span>
+Games
+</button>
+
+<button class="nav-btn"
+onclick="showPage('schedule',this)">
+<span>📅</span>
+Schedule
+</button>
+
+<button class="nav-btn"
+onclick="showPage('highlights',this)">
+<span>🎥</span>
 Highlights
-</button>
-
-<button onclick="showPage('statistics',this)">
-<span>📊</span>
-Stats
-</button>
-
-<button onclick="showPage('awards',this)">
-<span>🏅</span>
-Awards
-</button>
-
-<button onclick="showPage('matchday',this)">
-<span>🏟️</span>
-Matchday
-</button>
-
-<button onclick="showPage('history',this)">
-<span>📚</span>
-History
 </button>
 
 </nav>
 
-<!-- =====================================================
-     ADMIN PANEL
-     ===================================================== -->
 
-<div id="adminOverlay" class="admin-overlay">
+<!-- =========================================================
+     ADMIN PANEL
+     ========================================================= -->
+
+<div id="adminPanel" class="admin-panel">
 
 <div class="admin-box">
 
-<h2>🔐 Admin Control Panel</h2>
+
+<!-- LOGIN -->
 
 <div id="loginArea">
 
-<div class="notice">
-Admin access required.
+<div class="login-box">
+
+<h2 style="text-align:center;margin-bottom:10px;">
+🔐 Admin Control Panel
+</h2>
+
+<div class="login-message">
+Enter the admin password to continue.
 </div>
 
 <input
-  id="adminPassword"
-  type="password"
-  placeholder="Admin password"
-/>
+id="passwordInput"
+type="password"
+placeholder="Admin password"
+autocomplete="off">
 
-<button class="btn" onclick="login()">
+<button
+class="blue"
+onclick="login()">
 Login
 </button>
 
 </div>
 
-<div id="adminControls" style="display:none">
+</div>
 
-<!-- =====================================================
-     PLAYER MANAGEMENT
-     ===================================================== -->
 
-<div class="admin-section">
+<!-- CONTROLS -->
 
-<h3>👤 Player Management</h3>
+<div id="controls" style="display:none;">
 
-<input
-  id="playerName"
-  placeholder="Player name"
-/>
 
-<button class="btn" onclick="addPlayer()">
-➕ Add Player
-</button>
+<div class="admin-title">
 
-<select id="removePlayerSelect"></select>
-
-<button class="btn btn-red" onclick="removePlayer()">
-🗑️ Remove Player
-</button>
+<h2>
+⚙️ Admin Dashboard
+</h2>
 
 </div>
 
+
 <!-- =====================================================
-     TEAM MANAGEMENT
+     MATCH CONTROL
      ===================================================== -->
 
 <div class="admin-section">
 
-<h3>⚽ Team Management</h3>
+<h3>
+⚽ Match Control
+</h3>
 
-<input
-  id="teamName"
-  placeholder="Team name"
-/>
+<p class="admin-help">
+Select a match below to control the score, goals,
+halftime and full time.
+</p>
 
-<button class="btn" onclick="addTeam()">
-➕ Add Team
-</button>
 
-<select id="removeTeamSelect"></select>
-
-<button class="btn btn-red" onclick="removeTeam()">
-🗑️ Remove Team
-</button>
-
-</div>
-
-<!-- =====================================================
-     CREATE FIXTURE
-     ===================================================== -->
-
-<div class="admin-section">
-
-<h3>📅 Create Fixture</h3>
-
-<input
-  id="fixtureHome"
-  placeholder="Home team"
-/>
-
-<input
-  id="fixtureAway"
-  placeholder="Away team"
-/>
-
-<input
-  id="fixtureDate"
-  type="date"
-/>
-
-<input
-  id="fixtureTime"
-  type="time"
-/>
-
-<button class="btn btn-blue" onclick="createFixture()">
-📅 Create Fixture
-</button>
-
-</div>
-
-<!-- =====================================================
-     EDIT FIXTURE
-     ===================================================== -->
-
-<div class="admin-section">
-
-<h3>✏️ Update Scheduled Match</h3>
+<!-- THIS IS THE SCORE DROPDOWN -->
 
 <select
-  id="editMatchSelect"
-  onchange="loadMatchForEditing()">
+id="scoreMatchSelect"
+onchange="loadSelectedMatch()">
+
+<option value="">
+Select Score
+</option>
+
 </select>
 
-<input
-  id="editHome"
-  placeholder="Home team"
-/>
 
-<input
-  id="editAway"
-  placeholder="Away team"
-/>
+<div
+id="scoreControls"
+class="score-box"
+style="display:none;">
 
-<input
-  id="editDate"
-  type="date"
-/>
 
-<input
-  id="editTime"
-  type="time"
-/>
+<div id="selectedMatchName"
+style="
+text-align:center;
+font-weight:900;
+font-size:18px;
+">
+Match
+</div>
 
-<button class="btn" onclick="updateFixture()">
-💾 Save Match Changes
+
+<div class="score-display">
+
+<div>
+
+<div
+id="selectedHomeName"
+class="score-team-name">
+Home
+</div>
+
+<div
+id="selectedHomeScore"
+class="score-number">
+0
+</div>
+
+</div>
+
+
+<div style="
+font-size:25px;
+font-weight:900;
+">
+-
+</div>
+
+
+<div>
+
+<div
+id="selectedAwayName"
+class="score-team-name">
+Away
+</div>
+
+<div
+id="selectedAwayScore"
+class="score-number">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUICK SCORE -->
+
+<div class="score-buttons">
+
+<button
+class="green"
+onclick="quickGoal('home')">
+➕ Home Goal
 </button>
 
-<button class="btn btn-red" onclick="removeMatch()">
-🗑️ Remove Match
+<button
+class="green"
+onclick="quickGoal('away')">
+➕ Away Goal
 </button>
 
 </div>
 
-<!-- =====================================================
-     LIVE MATCH CONTROL
-     ===================================================== -->
 
-<div class="admin-section">
+<div class="score-buttons">
 
-<h3>🎮 Match Control</h3>
+<button
+class="red"
+onclick="quickRemoveGoal('home')">
+➖ Home Goal
+</button>
 
-<select
-  id="controlMatch"
-  onchange="updateAdminMatchInfo()">
-</select>
+<button
+class="red"
+onclick="quickRemoveGoal('away')">
+➖ Away Goal
+</button>
 
-<div id="adminMatchInfo"></div>
+</div>
 
-<button class="btn btn-green" onclick="startMatch()">
+
+<button
+class="green"
+onclick="startMatch()">
 🔴 Start Match
 </button>
 
-<button class="btn btn-orange" onclick="setHalfTime()">
+
+<button
+class="orange"
+onclick="halftimeMatch()">
 ⏸️ Halftime
 </button>
 
-<button class="btn btn-blue" onclick="startSecondHalf()">
-▶️ Second Half
+
+<button
+class="blue"
+onclick="updateScore()">
+💾 Update Score
 </button>
 
-<button class="btn btn-red" onclick="finishMatch()">
+
+<button
+class="red"
+onclick="fullTimeMatch()">
 🏁 Full Time
 </button>
 
+
+<!-- MANUAL SCORE -->
+
+<div style="
+margin-top:18px;
+font-weight:900;
+">
+Manual Score
 </div>
-
-<!-- =====================================================
-     SCORING
-     ===================================================== -->
-
-<div class="admin-section">
-
-<h3>⚽ Scoring</h3>
-
-<select
-  id="goalTeam"
-  onchange="updateGoalPlayers()">
-</select>
-
-<select id="goalScorer">
-</select>
-
-<select id="goalAssist">
-</select>
 
 <input
-  id="goalMinute"
-  type="number"
-  min="0"
-  placeholder="Minute"
-/>
+id="homeScoreInput"
+type="number"
+min="0"
+placeholder="Home score">
 
-<button class="btn btn-green" onclick="addGoal()">
-⚽ Add Goal
-</button>
+<input
+id="awayScoreInput"
+type="number"
+min="0"
+placeholder="Away score">
 
-<button class="btn btn-red" onclick="removeLastGoal()">
-➖ Remove Last Goal
-</button>
 
+<!-- PLAYER GOAL -->
+
+<div style="
+margin-top:18px;
+font-weight:900;
+">
+➕ Record Goal
 </div>
 
-<!-- =====================================================
-     CARDS
-     ===================================================== -->
+<select id="goalTeamSelect">
 
-<div class="admin-section">
-
-<h3>🟨🟥 Cards</h3>
-
-<select id="cardPlayer"></select>
-
-<select id="cardType">
-
-<option value="yellow">
-🟨 Yellow Card
-</option>
-
-<option value="red">
-🟥 Red Card
+<option value="">
+Select scoring team
 </option>
 
 </select>
 
-<input
-  id="cardMinute"
-  type="number"
-  placeholder="Minute"
-/>
 
-<button class="btn" onclick="addCard()">
-Add Card
+<select id="goalPlayerSelect">
+
+<option value="">
+Select player
+</option>
+
+</select>
+
+
+<button
+class="green"
+onclick="addGoal()">
+⚽ Add Goal + Player
 </button>
+
+
+<!-- REMOVE GOAL -->
+
+<div style="
+margin-top:18px;
+font-weight:900;
+">
+➖ Remove Recorded Goal
+</div>
+
+<select id="removeGoalSelect">
+
+<option value="">
+Select goal to remove
+</option>
+
+</select>
+
+
+<button
+class="red"
+onclick="removeGoal()">
+Remove Goal
+</button>
+
 
 </div>
 
+</div>
+
+
 <!-- =====================================================
-     SUBSTITUTIONS
+     CREATE MATCH
      ===================================================== -->
 
 <div class="admin-section">
 
-<h3>🔄 Substitution</h3>
+<h3>
+📅 Create Match
+</h3>
 
 <input
-  id="subOut"
-  placeholder="Player coming off"
-/>
+id="homeTeam"
+placeholder="Home team">
 
 <input
-  id="subIn"
-  placeholder="Player coming on"
-/>
+id="awayTeam"
+placeholder="Away team">
 
 <input
-  id="subMinute"
-  type="number"
-  placeholder="Minute"
-/>
+id="gameDate"
+type="date">
 
-<button class="btn" onclick="addSubstitution()">
-🔄 Add Substitution
+<input
+id="gameTime"
+type="time">
+
+<button
+class="blue"
+onclick="addFixture()">
+Create Match
 </button>
 
 </div>
 
+
 <!-- =====================================================
-     MOTM
+     MANAGE MATCHES
      ===================================================== -->
 
 <div class="admin-section">
 
-<h3>⭐ Man of the Match</h3>
+<h3>
+🛠️ Manage Existing Matches
+</h3>
 
-<select id="motmPlayer"></select>
+<p class="admin-help">
+Edit or remove matches that have already been scheduled.
+</p>
 
-<button class="btn btn-orange" onclick="setMOTM()">
-⭐ Set Man of the Match
+<div id="adminMatches"></div>
+
+</div>
+
+
+<!-- =====================================================
+     ADD PLAYER
+     ===================================================== -->
+
+<div class="admin-section">
+
+<h3>
+👤 Add Player
+</h3>
+
+<input
+id="playerName"
+placeholder="Player name">
+
+<button
+onclick="addPlayer()">
+Add Player
 </button>
 
 </div>
+
+
+<!-- =====================================================
+     ADD TEAM
+     ===================================================== -->
+
+<div class="admin-section">
+
+<h3>
+⚽ Add Team
+</h3>
+
+<input
+id="teamName"
+placeholder="Team name">
+
+<button
+onclick="addTeam()">
+Add Team
+</button>
+
+</div>
+
 
 <!-- =====================================================
      NEWS
@@ -1075,43 +1486,46 @@ Add Card
 
 <div class="admin-section">
 
-<h3>📰 News</h3>
+<h3>
+📰 Publish News
+</h3>
 
 <input
-  id="newsTitle"
-  placeholder="Headline"
-/>
+id="newsText"
+placeholder="News headline">
 
 <textarea
-  id="newsBody"
-  placeholder="News story">
+id="newsDescription"
+placeholder="Optional news description">
 </textarea>
 
-<button class="btn" onclick="addNews()">
-📰 Publish News
+<button
+onclick="addNews()">
+Publish News
 </button>
 
 </div>
 
+
 <!-- =====================================================
-     MEDIA
+     HIGHLIGHTS
      ===================================================== -->
 
 <div class="admin-section">
 
-<h3>📸 Photos & Videos / Highlights</h3>
+<h3>
+🎥 Add Photo / Video Highlight
+</h3>
+
+<p class="admin-help">
+Paste a direct image or video URL.
+</p>
 
 <input
-  id="mediaTitle"
-  placeholder="Highlight title"
-/>
+id="highlightTitle"
+placeholder="Highlight title">
 
-<input
-  id="mediaURL"
-  placeholder="Image or video URL"
-/>
-
-<select id="mediaType">
+<select id="highlightType">
 
 <option value="image">
 📸 Photo
@@ -1123,574 +1537,1412 @@ Add Card
 
 </select>
 
-<button class="btn btn-blue" onclick="addMedia()">
-➕ Add Highlight
-</button>
-
-</div>
-
-<!-- =====================================================
-     AWARDS
-     ===================================================== -->
-
-<div class="admin-section">
-
-<h3>🏅 Awards</h3>
-
 <input
-  id="awardMVP"
-  placeholder="MVP"
-/>
+id="highlightURL"
+placeholder="Image or video URL">
 
-<input
-  id="awardBoot"
-  placeholder="Golden Boot"
-/>
-
-<input
-  id="awardKeeper"
-  placeholder="Best Keeper"
-/>
-
-<input
-  id="awardPlaymaker"
-  placeholder="Best Playmaker"
-/>
-
-<button class="btn btn-orange" onclick="saveAwards()">
-🏅 Save Awards
-</button>
-
-</div>
-
-<!-- =====================================================
-     SEASON
-     ===================================================== -->
-
-<div class="admin-section">
-
-<h3>📚 Season Management</h3>
-
-<input
-  id="seasonInput"
-  placeholder="Season name"
-/>
-
-<button class="btn" onclick="changeSeason()">
-Save Season
-</button>
-
-<button class="btn btn-red" onclick="resetSeason()">
-⚠️ Reset Current Season
-</button>
-
-</div>
-
-<!-- =====================================================
-     BACKUP
-     ===================================================== -->
-
-<div class="admin-section">
-
-<h3>💾 Data Tools</h3>
-
-<button class="btn btn-blue" onclick="exportData()">
-💾 Export League Data
-</button>
-
-<button class="btn btn-red" onclick="deleteEverything()">
-⚠️ Delete Everything
-</button>
-
-</div>
+<textarea
+id="highlightDescription"
+placeholder="Highlight description">
+</textarea>
 
 <button
-  class="btn close-admin"
-  onclick="closeAdmin()">
+class="blue"
+onclick="addHighlight()">
+Add Highlight
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     DATA TOOLS
+     ===================================================== -->
+
+<div class="admin-section">
+
+<h3>
+🧰 Website Tools
+</h3>
+
+<button
+class="gray"
+onclick="refreshWebsite()">
+🔄 Refresh Website
+</button>
+
+<button
+class="red"
+onclick="resetData()">
+⚠️ Reset Website Data
+</button>
+
+</div>
+
+
+<button
+class="red"
+onclick="logout()"
+style="margin-top:25px;">
+🔒 Logout
+</button>
+
+
+<button
+onclick="closeAdmin()">
 Close Admin Panel
 </button>
 
-</div>
 
 </div>
 
 </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast">
+Saved!
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
 
 <script>
 
 /* =========================================================
-   PROJECT MINI FIELD DATA
+   ADMIN PASSWORD
    ========================================================= */
-
-/*
- IMPORTANT:
- This password is used only for the local admin panel.
- For a real secure website, authentication should happen
- on a server rather than inside a public HTML file.
-*/
 
 const ADMIN_PASSWORD = "1291";
 
-let season =
-  localStorage.getItem("pmfSeason") ||
-  "Project Mini Field Season 1";
+
+/* =========================================================
+   DATA
+   ========================================================= */
 
 let teams =
-  JSON.parse(localStorage.getItem("pmfTeams")) ||
-  [
-    "Elijah United",
-    "Jaylen Football Club",
-    "Alex Soccer Academy",
-    "Zacks Soccer Club",
-    "Luke Dynam FC"
-  ];
+JSON.parse(localStorage.getItem("pmfTeams")) || [
+
+"Elijah United",
+"Jaylen Football Club",
+"Alex Soccer Academy",
+"Zacks Soccer Club",
+"Luke Dynam FC"
+
+];
+
 
 let players =
-  JSON.parse(localStorage.getItem("pmfPlayers")) ||
-  [];
+JSON.parse(localStorage.getItem("pmfPlayers")) || [];
 
-let matches =
-  JSON.parse(localStorage.getItem("pmfMatches")) ||
-  [];
+
+let fixtures =
+JSON.parse(localStorage.getItem("pmfFixtures")) || [];
+
 
 let news =
-  JSON.parse(localStorage.getItem("pmfNews")) ||
-  [];
+JSON.parse(localStorage.getItem("pmfNews")) || [
 
-let media =
-  JSON.parse(localStorage.getItem("pmfMedia")) ||
-  [];
+{
+    title:"Project Mini Field has begun!",
+    description:"Welcome to Project Mini Field."
+}
 
-let awards =
-  JSON.parse(localStorage.getItem("pmfAwards")) ||
-  {
-    mvp:"",
-    boot:"",
-    keeper:"",
-    playmaker:""
-  };
+];
 
-let seasonHistory =
-  JSON.parse(localStorage.getItem("pmfHistory")) ||
-  [];
+
+let highlights =
+JSON.parse(localStorage.getItem("pmfHighlights")) || [];
 
 
 /* =========================================================
    DATA MIGRATION
    ========================================================= */
 
-players = players.map(player => {
+players = players.map(player=>{
 
-  if(typeof player === "string"){
+    if(typeof player === "string"){
+
+        return {
+            name:player,
+            goals:0
+        };
+
+    }
 
     return {
-      id:Date.now()+Math.random(),
-      name:player,
-      goals:0,
-      assists:0,
-      yellow:0,
-      red:0,
-      motm:0
+        name:player.name || "Unknown",
+        goals:Number(player.goals || 0)
     };
-
-  }
-
-  return {
-    id:player.id || Date.now()+Math.random(),
-    name:player.name || "Unknown Player",
-    goals:Number(player.goals)||0,
-    assists:Number(player.assists)||0,
-    yellow:Number(player.yellow)||0,
-    red:Number(player.red)||0,
-    motm:Number(player.motm)||0
-  };
 
 });
 
 
+news = news.map(item=>{
+
+    if(typeof item === "string"){
+
+        return {
+            title:item,
+            description:""
+        };
+
+    }
+
+    return item;
+
+});
+
+
+fixtures = fixtures.map(match=>{
+
+    return {
+
+        id:match.id || Date.now()+Math.random(),
+
+        home:match.home || "Home",
+
+        away:match.away || "Away",
+
+        date:match.date || "",
+
+        time:match.time || "",
+
+        homeScore:Number(match.homeScore || 0),
+
+        awayScore:Number(match.awayScore || 0),
+
+        status:match.status || "scheduled",
+
+        goals:Array.isArray(match.goals)
+            ? match.goals
+            : []
+
+    };
+
+});
+
+
+saveAll();
+
+
 /* =========================================================
-   SAVE EVERYTHING
+   SAVE
    ========================================================= */
 
-function saveData(){
+function saveAll(){
 
-  localStorage.setItem(
-    "pmfSeason",
-    season
-  );
+    localStorage.setItem(
+        "pmfTeams",
+        JSON.stringify(teams)
+    );
 
-  localStorage.setItem(
-    "pmfTeams",
-    JSON.stringify(teams)
-  );
+    localStorage.setItem(
+        "pmfPlayers",
+        JSON.stringify(players)
+    );
 
-  localStorage.setItem(
-    "pmfPlayers",
-    JSON.stringify(players)
-  );
+    localStorage.setItem(
+        "pmfFixtures",
+        JSON.stringify(fixtures)
+    );
 
-  localStorage.setItem(
-    "pmfMatches",
-    JSON.stringify(matches)
-  );
+    localStorage.setItem(
+        "pmfNews",
+        JSON.stringify(news)
+    );
 
-  localStorage.setItem(
-    "pmfNews",
-    JSON.stringify(news)
-  );
-
-  localStorage.setItem(
-    "pmfMedia",
-    JSON.stringify(media)
-  );
-
-  localStorage.setItem(
-    "pmfAwards",
-    JSON.stringify(awards)
-  );
-
-  localStorage.setItem(
-    "pmfHistory",
-    JSON.stringify(seasonHistory)
-  );
+    localStorage.setItem(
+        "pmfHighlights",
+        JSON.stringify(highlights)
+    );
 
 }
 
 
 /* =========================================================
-   HTML SECURITY
+   TOAST
    ========================================================= */
 
-function escapeHTML(value){
+function toast(message){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    const box =
+        document.getElementById("toast");
+
+    box.textContent=message;
+
+    box.classList.add("show");
+
+    setTimeout(()=>{
+        box.classList.remove("show");
+    },2200);
 
 }
 
 
 /* =========================================================
-   NAVIGATION
+   PAGE SWITCH
    ========================================================= */
 
-function showPage(pageID,button){
+function showPage(pageId,button){
 
-  document
-    .querySelectorAll(".page")
+    document.querySelectorAll(".page")
     .forEach(page=>{
-      page.classList.remove("active");
+        page.classList.remove("active");
     });
 
-  const page =
-    document.getElementById(pageID);
+    const page =
+        document.getElementById(pageId);
 
-  if(page){
-    page.classList.add("active");
-  }
+    if(page){
 
-  document
-    .querySelectorAll(".nav button")
+        page.classList.add("active");
+
+    }
+
+    document.querySelectorAll(".nav-btn")
     .forEach(btn=>{
-      btn.classList.remove("active");
+        btn.classList.remove("active");
     });
 
-  if(button){
-    button.classList.add("active");
-  }
+    if(button){
 
-  renderAll();
+        button.classList.add("active");
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
 /* =========================================================
-   ADMIN
+   ADMIN OPEN / CLOSE
    ========================================================= */
 
 function openAdmin(){
 
-  document
-    .getElementById("adminOverlay")
-    .style.display="block";
+    document.getElementById(
+        "adminPanel"
+    ).style.display="block";
 
 }
+
 
 function closeAdmin(){
 
-  document
-    .getElementById("adminOverlay")
-    .style.display="none";
-
-}
-
-function login(){
-
-  const password =
-    document.getElementById("adminPassword").value;
-
-  if(password === ADMIN_PASSWORD){
-
-    document.getElementById("loginArea")
-      .style.display="none";
-
-    document.getElementById("adminControls")
-      .style.display="block";
-
-    populateAdmin();
-
-  }else{
-
-    alert("Incorrect password.");
-
-  }
+    document.getElementById(
+        "adminPanel"
+    ).style.display="none";
 
 }
 
 
 /* =========================================================
-   PLAYER MANAGEMENT
+   LOGIN
+   ========================================================= */
+
+function login(){
+
+    const password =
+        document.getElementById(
+            "passwordInput"
+        ).value;
+
+    if(password === ADMIN_PASSWORD){
+
+        document.getElementById(
+            "loginArea"
+        ).style.display="none";
+
+        document.getElementById(
+            "controls"
+        ).style.display="block";
+
+        updateScoreDropdown();
+
+        renderAdminMatches();
+
+        toast("Admin unlocked!");
+
+    }else{
+
+        alert("Incorrect password.");
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+function logout(){
+
+    document.getElementById(
+        "controls"
+    ).style.display="none";
+
+    document.getElementById(
+        "loginArea"
+    ).style.display="block";
+
+    document.getElementById(
+        "passwordInput"
+    ).value="";
+
+    closeAdmin();
+
+}
+
+
+/* =========================================================
+   ADD PLAYER
    ========================================================= */
 
 function addPlayer(){
 
-  const name =
-    document.getElementById("playerName")
-      .value.trim();
+    const input =
+        document.getElementById(
+            "playerName"
+        );
 
-  if(!name){
+    const name =
+        input.value.trim();
 
-    alert("Enter a player name.");
-    return;
+    if(!name){
 
-  }
+        alert("Enter a player name.");
 
-  const exists =
-    players.some(
-      p=>p.name.toLowerCase()===name.toLowerCase()
-    );
+        return;
 
-  if(exists){
+    }
 
-    alert("That player already exists.");
-    return;
+    players.push({
 
-  }
+        name:name,
 
-  players.push({
+        goals:0
 
-    id:Date.now()+Math.random(),
+    });
 
-    name:name,
+    input.value="";
 
-    goals:0,
+    saveAll();
 
-    assists:0,
+    renderAll();
 
-    yellow:0,
+    updateGoalPlayerDropdown();
 
-    red:0,
-
-    motm:0
-
-  });
-
-  document.getElementById("playerName").value="";
-
-  saveData();
-  renderAll();
-  populateAdmin();
-
-  alert("Player added!");
-
-}
-
-
-function removePlayer(){
-
-  const name =
-    document.getElementById("removePlayerSelect").value;
-
-  if(!name){
-
-    alert("Choose a player.");
-    return;
-
-  }
-
-  if(!confirm("Remove "+name+"?")){
-
-    return;
-
-  }
-
-  players =
-    players.filter(
-      player=>player.name!==name
-    );
-
-  saveData();
-  renderAll();
-  populateAdmin();
+    toast("Player added!");
 
 }
 
 
 /* =========================================================
-   TEAM MANAGEMENT
+   ADD TEAM
    ========================================================= */
 
 function addTeam(){
 
-  const name =
-    document.getElementById("teamName")
-      .value.trim();
+    const input =
+        document.getElementById(
+            "teamName"
+        );
 
-  if(!name){
+    const name =
+        input.value.trim();
 
-    alert("Enter a team name.");
-    return;
+    if(!name){
 
-  }
+        alert("Enter a team name.");
 
-  if(
-    teams.some(
-      team=>team.toLowerCase()===name.toLowerCase()
-    )
-  ){
+        return;
 
-    alert("That team already exists.");
-    return;
+    }
 
-  }
+    teams.push(name);
 
-  teams.push(name);
+    input.value="";
 
-  document.getElementById("teamName").value="";
+    saveAll();
 
-  saveData();
-  renderAll();
-  populateAdmin();
+    renderAll();
 
-  alert("Team added!");
-
-}
-
-
-function removeTeam(){
-
-  const name =
-    document.getElementById("removeTeamSelect").value;
-
-  if(!name){
-
-    alert("Choose a team.");
-    return;
-
-  }
-
-  if(!confirm("Remove "+name+"?")){
-
-    return;
-
-  }
-
-  teams =
-    teams.filter(team=>team!==name);
-
-  saveData();
-  renderAll();
-  populateAdmin();
+    toast("Team added!");
 
 }
 
 
 /* =========================================================
-   FIXTURES
+   CREATE MATCH
    ========================================================= */
 
-function createFixture(){
+function addFixture(){
 
-  const home =
-    document.getElementById("fixtureHome")
-      .value.trim();
+    const home =
+        document.getElementById(
+            "homeTeam"
+        ).value.trim();
 
-  const away =
-    document.getElementById("fixtureAway")
-      .value.trim();
+    const away =
+        document.getElementById(
+            "awayTeam"
+        ).value.trim();
 
-  const date =
-    document.getElementById("fixtureDate").value;
+    const date =
+        document.getElementById(
+            "gameDate"
+        ).value;
 
-  const time =
-    document.getElementById("fixtureTime").value;
+    const time =
+        document.getElementById(
+            "gameTime"
+        ).value;
 
-  if(!home || !away || !date || !time){
 
-    alert("Fill in all fixture information.");
-    return;
+    if(!home || !away || !date || !time){
 
-  }
+        alert(
+            "Fill in the home team, away team, date and time."
+        );
 
-  if(home===away){
+        return;
 
-    alert("A team cannot play itself.");
-    return;
+    }
 
-  }
 
-  const match = {
+    if(home.toLowerCase() === away.toLowerCase()){
 
-    id:Date.now()+Math.random(),
+        alert(
+            "The two teams must be different."
+        );
 
-    home:home,
+        return;
 
-    away:away,
+    }
 
-    date:date,
 
-    time:time,
+    fixtures.push({
 
-    homeScore:0,
+        id:Date.now(),
 
-    awayScore:0,
+        home:home,
 
-    status:"upcoming",
+        away:away,
 
-    events:[],
+        date:date,
 
-    startedAt:null,
+        time:time,
 
-    halftimeAt:null,
+        homeScore:0,
 
-    finishedAt:null,
+        awayScore:0,
 
-    secondHalfAt:null,
+        status:"scheduled",
 
-    motm:""
+        goals:[]
 
-  };
+    });
 
-  matches.push(match);
 
-  document.getElementById("fixtureHome").value="";
-  document.getElementById("fixtureAway").value="";
-  document.getElementById("fixtureDate").value="";
-  document.getElementById("fixtureTime").value="";
+    document.getElementById(
+        "homeTeam"
+    ).value="";
 
-  saveData();
-  renderAll();
-  populateAdmin();
+    document.getElementById(
+        "awayTeam"
+    ).value="";
 
-  alert("Fixture created!");
+    document.getElementById(
+        "gameDate"
+    ).value="";
+
+    document.getElementById(
+        "gameTime"
+    ).value="";
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    renderAdminMatches();
+
+    toast("Match created!");
+
+}
+
+
+/* =========================================================
+   SCORE DROPDOWN
+   ========================================================= */
+
+function updateScoreDropdown(){
+
+    const select =
+        document.getElementById(
+            "scoreMatchSelect"
+        );
+
+    if(!select) return;
+
+
+    const oldValue =
+        select.value;
+
+
+    select.innerHTML =
+        '<option value="">Select Score</option>';
+
+
+    fixtures
+    .filter(match=>match.status !== "final")
+    .forEach(match=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value=match.id;
+
+        option.textContent =
+            match.home +
+            " " +
+            match.homeScore +
+            " - " +
+            match.awayScore +
+            " " +
+            match.away +
+            " [" +
+            statusText(match.status) +
+            "]";
+
+        select.appendChild(option);
+
+    });
+
+
+    const stillExists =
+        [...select.options]
+        .some(option=>option.value==oldValue);
+
+
+    if(stillExists){
+
+        select.value=oldValue;
+
+    }
+
+}
+
+
+/* =========================================================
+   GET SELECTED MATCH
+   ========================================================= */
+
+function getSelectedMatch(){
+
+    const value =
+        document.getElementById(
+            "scoreMatchSelect"
+        ).value;
+
+    if(!value){
+
+        return null;
+
+    }
+
+    return fixtures.find(
+        match=>String(match.id)===String(value)
+    ) || null;
+
+}
+
+
+/* =========================================================
+   LOAD SELECTED MATCH
+   ========================================================= */
+
+function loadSelectedMatch(){
+
+    const match =
+        getSelectedMatch();
+
+    const controls =
+        document.getElementById(
+            "scoreControls"
+        );
+
+
+    if(!match){
+
+        controls.style.display="none";
+
+        return;
+
+    }
+
+
+    controls.style.display="block";
+
+
+    document.getElementById(
+        "selectedMatchName"
+    ).textContent =
+        match.home +
+        " vs " +
+        match.away;
+
+
+    document.getElementById(
+        "selectedHomeName"
+    ).textContent =
+        match.home;
+
+
+    document.getElementById(
+        "selectedAwayName"
+    ).textContent =
+        match.away;
+
+
+    document.getElementById(
+        "selectedHomeScore"
+    ).textContent =
+        match.homeScore;
+
+
+    document.getElementById(
+        "selectedAwayScore"
+    ).textContent =
+        match.awayScore;
+
+
+    document.getElementById(
+        "homeScoreInput"
+    ).value =
+        match.homeScore;
+
+
+    document.getElementById(
+        "awayScoreInput"
+    ).value =
+        match.awayScore;
+
+
+    updateGoalTeamDropdown(match);
+
+    updateGoalPlayerDropdown();
+
+    updateRemoveGoalDropdown(match);
+
+}
+
+
+/* =========================================================
+   GOAL TEAM DROPDOWN
+   ========================================================= */
+
+function updateGoalTeamDropdown(match){
+
+    const select =
+        document.getElementById(
+            "goalTeamSelect"
+        );
+
+    select.innerHTML =
+        '<option value="">Select scoring team</option>';
+
+
+    if(!match) return;
+
+
+    const homeOption =
+        document.createElement("option");
+
+    homeOption.value="home";
+
+    homeOption.textContent =
+        match.home;
+
+    select.appendChild(homeOption);
+
+
+    const awayOption =
+        document.createElement("option");
+
+    awayOption.value="away";
+
+    awayOption.textContent =
+        match.away;
+
+    select.appendChild(awayOption);
+
+}
+
+
+/* =========================================================
+   PLAYER DROPDOWN
+   ========================================================= */
+
+function updateGoalPlayerDropdown(){
+
+    const select =
+        document.getElementById(
+            "goalPlayerSelect"
+        );
+
+    select.innerHTML =
+        '<option value="">Select player</option>';
+
+
+    players.forEach((player,index)=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value=index;
+
+        option.textContent =
+            player.name;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================================================
+   REMOVE GOAL DROPDOWN
+   ========================================================= */
+
+function updateRemoveGoalDropdown(match){
+
+    const select =
+        document.getElementById(
+            "removeGoalSelect"
+        );
+
+    select.innerHTML =
+        '<option value="">Select goal to remove</option>';
+
+
+    if(!match) return;
+
+
+    match.goals.forEach((goal,index)=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value=index;
+
+        option.textContent =
+            goal.player +
+            " — " +
+            goal.team;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================================================
+   START MATCH
+   ========================================================= */
+
+function startMatch(){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    if(match.status==="final"){
+
+        alert("This match is already finished.");
+
+        return;
+
+    }
+
+
+    match.status="live";
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast("🔴 Match is LIVE!");
+
+}
+
+
+/* =========================================================
+   HALFTIME
+   ========================================================= */
+
+function halftimeMatch(){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    if(match.status==="final"){
+
+        alert("This match is already finished.");
+
+        return;
+
+    }
+
+
+    match.status="halftime";
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast("⏸️ Halftime!");
+
+}
+
+
+/* =========================================================
+   UPDATE MANUAL SCORE
+   ========================================================= */
+
+function updateScore(){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    let home =
+        parseInt(
+            document.getElementById(
+                "homeScoreInput"
+            ).value,
+            10
+        );
+
+
+    let away =
+        parseInt(
+            document.getElementById(
+                "awayScoreInput"
+            ).value,
+            10
+        );
+
+
+    if(isNaN(home)) home=0;
+
+    if(isNaN(away)) away=0;
+
+
+    home=Math.max(0,home);
+
+    away=Math.max(0,away);
+
+
+    match.homeScore=home;
+
+    match.awayScore=away;
+
+
+    if(match.status==="scheduled"){
+
+        match.status="live";
+
+    }
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast("Score updated!");
+
+}
+
+
+/* =========================================================
+   QUICK GOAL
+   ========================================================= */
+
+function quickGoal(side){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    if(match.status==="final"){
+
+        alert("This match is finished.");
+
+        return;
+
+    }
+
+
+    if(side==="home"){
+
+        match.homeScore++;
+
+    }else{
+
+        match.awayScore++;
+
+    }
+
+
+    if(match.status==="scheduled"){
+
+        match.status="live";
+
+    }
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast("⚽ Goal added!");
+
+}
+
+
+/* =========================================================
+   QUICK REMOVE GOAL
+   ========================================================= */
+
+function quickRemoveGoal(side){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    if(side==="home"){
+
+        match.homeScore =
+            Math.max(
+                0,
+                match.homeScore-1
+            );
+
+    }else{
+
+        match.awayScore =
+            Math.max(
+                0,
+                match.awayScore-1
+            );
+
+    }
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast("Goal removed from score.");
+
+}
+
+
+/* =========================================================
+   ADD GOAL WITH PLAYER
+   ========================================================= */
+
+function addGoal(){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    const team =
+        document.getElementById(
+            "goalTeamSelect"
+        ).value;
+
+
+    const playerIndex =
+        document.getElementById(
+            "goalPlayerSelect"
+        ).value;
+
+
+    if(!team){
+
+        alert("Select the scoring team.");
+
+        return;
+
+    }
+
+
+    if(playerIndex===""){
+
+        alert("Select the player.");
+
+        return;
+
+    }
+
+
+    const player =
+        players[Number(playerIndex)];
+
+
+    if(!player){
+
+        alert("Player not found.");
+
+        return;
+
+    }
+
+
+    const teamName =
+        team==="home"
+        ? match.home
+        : match.away;
+
+
+    if(team==="home"){
+
+        match.homeScore++;
+
+    }else{
+
+        match.awayScore++;
+
+    }
+
+
+    player.goals =
+        Number(player.goals || 0)+1;
+
+
+    match.goals.push({
+
+        team:teamName,
+
+        player:player.name,
+
+        timestamp:
+            new Date().toLocaleTimeString([],{
+                hour:"2-digit",
+                minute:"2-digit"
+            })
+
+    });
+
+
+    match.status="live";
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast(
+        "⚽ Goal for " +
+        teamName +
+        "!"
+    );
+
+}
+
+
+/* =========================================================
+   REMOVE RECORDED GOAL
+   ========================================================= */
+
+function removeGoal(){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    const index =
+        document.getElementById(
+            "removeGoalSelect"
+        ).value;
+
+
+    if(index===""){
+
+        alert("Select a goal.");
+
+        return;
+
+    }
+
+
+    const goal =
+        match.goals[Number(index)];
+
+
+    if(!goal){
+
+        return;
+
+    }
+
+
+    if(goal.team===match.home){
+
+        match.homeScore =
+            Math.max(
+                0,
+                match.homeScore-1
+            );
+
+    }else{
+
+        match.awayScore =
+            Math.max(
+                0,
+                match.awayScore-1
+            );
+
+    }
+
+
+    const player =
+        players.find(
+            p=>p.name===goal.player
+        );
+
+
+    if(player){
+
+        player.goals =
+            Math.max(
+                0,
+                Number(player.goals || 0)-1
+            );
+
+    }
+
+
+    match.goals.splice(
+        Number(index),
+        1
+    );
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value=match.id;
+
+    loadSelectedMatch();
+
+    renderAdminMatches();
+
+    toast("Goal removed!");
+
+}
+
+
+/* =========================================================
+   FULL TIME
+   ========================================================= */
+
+function fullTimeMatch(){
+
+    const match =
+        getSelectedMatch();
+
+    if(!match){
+
+        alert("Select a match first.");
+
+        return;
+
+    }
+
+
+    const confirmation =
+        confirm(
+            "End " +
+            match.home +
+            " vs " +
+            match.away +
+            "?"
+        );
+
+
+    if(!confirmation){
+
+        return;
+
+    }
+
+
+    match.status="final";
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    renderAdminMatches();
+
+
+    document.getElementById(
+        "scoreControls"
+    ).style.display="none";
+
+
+    document.getElementById(
+        "scoreMatchSelect"
+    ).value="";
+
+
+    toast(
+        "🏁 Full Time! Match moved to Results."
+    );
 
 }
 
@@ -1699,79 +2951,75 @@ function createFixture(){
    EDIT MATCH
    ========================================================= */
 
-function getSelectedEditMatch(){
+function editMatch(id){
 
-  const id =
-    document.getElementById("editMatchSelect").value;
-
-  return matches.find(
-    match=>String(match.id)===String(id)
-  );
-
-}
+    const match =
+        fixtures.find(
+            game=>game.id===id
+        );
 
 
-function loadMatchForEditing(){
-
-  const match =
-    getSelectedEditMatch();
-
-  if(!match){
-    return;
-  }
-
-  document.getElementById("editHome").value =
-    match.home;
-
-  document.getElementById("editAway").value =
-    match.away;
-
-  document.getElementById("editDate").value =
-    match.date;
-
-  document.getElementById("editTime").value =
-    match.time;
-
-}
+    if(!match) return;
 
 
-function updateFixture(){
+    const home =
+        prompt(
+            "Home team:",
+            match.home
+        );
 
-  const match =
-    getSelectedEditMatch();
 
-  if(!match){
+    if(home===null) return;
 
-    alert("Choose a match.");
-    return;
 
-  }
+    const away =
+        prompt(
+            "Away team:",
+            match.away
+        );
 
-  const home =
-    document.getElementById("editHome")
-      .value.trim();
 
-  const away =
-    document.getElementById("editAway")
-      .value.trim();
+    if(away===null) return;
 
-  if(home)match.home=home;
-  if(away)match.away=away;
 
-  const date =
-    document.getElementById("editDate").value;
+    const date =
+        prompt(
+            "Date (YYYY-MM-DD):",
+            match.date
+        );
 
-  const time =
-    document.getElementById("editTime").value;
 
-  if(date)match.date=date;
-  if(time)match.time=time;
+    if(date===null) return;
 
-  saveData();
-  renderAll();
-  populateAdmin();
 
-  alert("Match updated!");
+    const time =
+        prompt(
+            "Time:",
+            match.time
+        );
+
+
+    if(time===null) return;
+
+
+    match.home=home.trim();
+
+    match.away=away.trim();
+
+    match.date=date.trim();
+
+    match.time=time.trim();
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    renderAdminMatches();
+
+    toast("Match updated!");
 
 }
 
@@ -1780,731 +3028,172 @@ function updateFixture(){
    REMOVE MATCH
    ========================================================= */
 
-function removeMatch(){
+function removeMatch(id){
 
-  const match =
-    getSelectedEditMatch();
+    const match =
+        fixtures.find(
+            game=>game.id===id
+        );
 
-  if(!match){
 
-    alert("Choose a match.");
-    return;
+    if(!match) return;
 
-  }
 
-  if(
-    !confirm(
-      "Remove "+match.home+" vs "+match.away+"?"
-    )
-  ){
+    const confirmation =
+        confirm(
+            "Remove " +
+            match.home +
+            " vs " +
+            match.away +
+            "?"
+        );
 
-    return;
 
-  }
+    if(!confirmation) return;
 
-  matches =
-    matches.filter(
-      m=>m.id!==match.id
-    );
 
-  saveData();
-  renderAll();
-  populateAdmin();
+    fixtures =
+        fixtures.filter(
+            game=>game.id!==id
+        );
+
+
+    saveAll();
+
+    renderAll();
+
+    updateScoreDropdown();
+
+    renderAdminMatches();
+
+
+    document.getElementById(
+        "scoreControls"
+    ).style.display="none";
+
+
+    toast("Match removed!");
 
 }
 
 
 /* =========================================================
-   MATCH CONTROL
+   ADMIN MATCH LIST
    ========================================================= */
 
-function getControlMatch(){
+function renderAdminMatches(){
 
-  const id =
-    document.getElementById("controlMatch").value;
+    const box =
+        document.getElementById(
+            "adminMatches"
+        );
 
-  return matches.find(
-    match=>String(match.id)===String(id)
-  );
 
-}
+    if(!box) return;
 
 
-function updateAdminMatchInfo(){
+    if(fixtures.length===0){
 
-  const match =
-    getControlMatch();
+        box.innerHTML =
+            '<div class="empty">No matches yet.</div>';
 
-  const box =
-    document.getElementById("adminMatchInfo");
-
-  if(!match){
-
-    box.innerHTML="";
-    return;
-
-  }
-
-  box.innerHTML=`
-
-    <div class="notice">
-
-      <strong>
-      ${escapeHTML(match.home)}
-      ${match.homeScore}
-      -
-      ${match.awayScore}
-      ${escapeHTML(match.away)}
-      </strong>
-
-      <br>
-
-      Status:
-      <b>${escapeHTML(match.status)}</b>
-
-    </div>
-
-  `;
-
-  updateGoalPlayers();
-
-}
-
-
-function startMatch(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  if(match.status==="finished"){
-
-    alert("This match is already finished.");
-    return;
-
-  }
-
-  match.status="live";
-
-  if(!match.startedAt){
-
-    match.startedAt=Date.now();
-
-  }
-
-  match.events.push({
-
-    type:"start",
-
-    time:new Date().toLocaleTimeString()
-
-  });
-
-  saveData();
-  renderAll();
-  updateAdminMatchInfo();
-
-}
-
-
-function setHalfTime(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  if(match.status!=="live"){
-
-    alert("The match needs to be live.");
-    return;
-
-  }
-
-  match.status="halftime";
-
-  match.halftimeAt=Date.now();
-
-  match.events.push({
-
-    type:"halftime",
-
-    minute:"HT"
-
-  });
-
-  saveData();
-  renderAll();
-  updateAdminMatchInfo();
-
-}
-
-
-function startSecondHalf(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  if(
-    match.status!=="halftime" &&
-    match.status!=="live"
-  ){
-
-    alert("The match is not at halftime.");
-    return;
-
-  }
-
-  match.status="live";
-
-  match.secondHalfAt=Date.now();
-
-  match.events.push({
-
-    type:"secondhalf",
-
-    minute:"46"
-
-  });
-
-  saveData();
-  renderAll();
-  updateAdminMatchInfo();
-
-}
-
-
-function finishMatch(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  if(match.status==="finished"){
-
-    alert("Already finished.");
-    return;
-
-  }
-
-  if(
-    !confirm(
-      "End the match?\n\n"+
-      match.home+" "+
-      match.homeScore+
-      " - "+
-      match.awayScore+" "+
-      match.away
-    )
-  ){
-
-    return;
-
-  }
-
-  match.status="finished";
-
-  match.finishedAt=Date.now();
-
-  match.events.push({
-
-    type:"fulltime",
-
-    minute:"FT"
-
-  });
-
-  saveData();
-  renderAll();
-  populateAdmin();
-
-  alert(
-    "FULL TIME!\n"+
-    match.home+" "+
-    match.homeScore+
-    " - "+
-    match.awayScore+" "+
-    match.away
-  );
-
-}
-
-
-/* =========================================================
-   GOALS
-   ========================================================= */
-
-function updateGoalPlayers(){
-
-  const match =
-    getControlMatch();
-
-  const team =
-    document.getElementById("goalTeam").value;
-
-  const scorer =
-    document.getElementById("goalScorer");
-
-  const assist =
-    document.getElementById("goalAssist");
-
-  if(!match){
-
-    scorer.innerHTML=
-      `<option value="">Select scorer</option>`;
-
-    assist.innerHTML=
-      `<option value="">No assist</option>`;
-
-    return;
-
-  }
-
-  let teamPlayers =
-    players;
-
-  /*
-    This keeps the system flexible because players
-    currently don't require a separate team assignment.
-  */
-
-  scorer.innerHTML=
-    `<option value="">Select scorer</option>`+
-    teamPlayers.map(
-      p=>
-      `<option value="${escapeHTML(p.name)}">
-        ${escapeHTML(p.name)}
-      </option>`
-    ).join("");
-
-  assist.innerHTML=
-    `<option value="">No assist</option>`+
-    players.map(
-      p=>
-      `<option value="${escapeHTML(p.name)}">
-        ${escapeHTML(p.name)}
-      </option>`
-    ).join("");
-
-}
-
-
-function addGoal(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  if(
-    match.status!=="live" &&
-    match.status!=="halftime"
-  ){
-
-    alert("Start the match first.");
-    return;
-
-  }
-
-  const team =
-    document.getElementById("goalTeam").value;
-
-  const scorer =
-    document.getElementById("goalScorer").value;
-
-  const assist =
-    document.getElementById("goalAssist").value;
-
-  const minute =
-    document.getElementById("goalMinute").value ||
-    "?";
-
-  if(!team || !scorer){
-
-    alert("Choose a team and scorer.");
-    return;
-
-  }
-
-  if(team===match.home){
-
-    match.homeScore++;
-
-  }else if(team===match.away){
-
-    match.awayScore++;
-
-  }else{
-
-    alert("That team isn't playing.");
-    return;
-
-  }
-
-  const player =
-    players.find(
-      p=>p.name===scorer
-    );
-
-  if(player){
-
-    player.goals++;
-
-  }
-
-  if(assist){
-
-    const assistPlayer =
-      players.find(
-        p=>p.name===assist
-      );
-
-    if(assistPlayer){
-
-      assistPlayer.assists++;
+        return;
 
     }
 
-  }
 
-  match.events.push({
+    box.innerHTML =
+        fixtures
+        .slice()
+        .reverse()
+        .map(match=>`
 
-    type:"goal",
+            <div class="admin-match">
 
-    team:team,
+                <div class="admin-match-title">
 
-    scorer:scorer,
+                    ${escapeHTML(match.home)}
 
-    assist:assist,
+                    ${match.homeScore}
 
-    minute:minute
+                    -
 
-  });
+                    ${match.awayScore}
 
-  document.getElementById("goalMinute").value="";
+                    ${escapeHTML(match.away)}
 
-  saveData();
-  renderAll();
-  updateAdminMatchInfo();
+                </div>
 
-  alert(
-    "⚽ GOAL!\n"+
-    scorer+
-    " scored for "+
-    team
-  );
+                <div class="admin-match-meta">
 
-}
+                    ${statusText(match.status)}
 
+                    <br>
 
-/* =========================================================
-   REMOVE LAST GOAL
-   ========================================================= */
+                    ${escapeHTML(match.date)}
 
-function removeLastGoal(){
+                    at
 
-  const match =
-    getControlMatch();
+                    ${escapeHTML(match.time)}
 
-  if(!match){
+                </div>
 
-    alert("Choose a match.");
-    return;
+                <div class="admin-match-actions">
 
-  }
+                    <button
+                    class="blue"
+                    onclick="selectMatchFromAdmin(${match.id})">
 
-  let index=-1;
+                    🎮 Score
 
-  for(
-    let i=match.events.length-1;
-    i>=0;
-    i--
-  ){
+                    </button>
 
-    if(match.events[i].type==="goal"){
+                    <button
+                    class="gray"
+                    onclick="editMatch(${match.id})">
 
-      index=i;
-      break;
+                    ✏️ Edit
 
-    }
+                    </button>
 
-  }
+                    <button
+                    class="red"
+                    onclick="removeMatch(${match.id})">
 
-  if(index===-1){
+                    🗑️ Remove
 
-    alert("There are no goals to remove.");
-    return;
+                    </button>
 
-  }
+                </div>
 
-  const event =
-    match.events[index];
+            </div>
 
-  if(event.team===match.home){
-
-    match.homeScore =
-      Math.max(0,match.homeScore-1);
-
-  }
-
-  if(event.team===match.away){
-
-    match.awayScore =
-      Math.max(0,match.awayScore-1);
-
-  }
-
-  const scorer =
-    players.find(
-      p=>p.name===event.scorer
-    );
-
-  if(scorer){
-
-    scorer.goals =
-      Math.max(0,scorer.goals-1);
-
-  }
-
-  if(event.assist){
-
-    const assist =
-      players.find(
-        p=>p.name===event.assist
-      );
-
-    if(assist){
-
-      assist.assists =
-        Math.max(0,assist.assists-1);
-
-    }
-
-  }
-
-  match.events.splice(index,1);
-
-  saveData();
-  renderAll();
-  updateAdminMatchInfo();
+        `)
+        .join("");
 
 }
 
 
 /* =========================================================
-   CARDS
+   SELECT MATCH FROM ADMIN LIST
    ========================================================= */
 
-function addCard(){
+function selectMatchFromAdmin(id){
 
-  const match =
-    getControlMatch();
+    const select =
+        document.getElementById(
+            "scoreMatchSelect"
+        );
 
-  if(!match){
 
-    alert("Choose a match.");
-    return;
+    select.value=id;
 
-  }
+    loadSelectedMatch();
 
-  const playerName =
-    document.getElementById("cardPlayer").value;
-
-  const card =
-    document.getElementById("cardType").value;
-
-  const minute =
-    document.getElementById("cardMinute").value ||
-    "?";
-
-  if(!playerName){
-
-    alert("Choose a player.");
-    return;
-
-  }
-
-  const player =
-    players.find(
-      p=>p.name===playerName
-    );
-
-  if(player){
-
-    if(card==="yellow"){
-
-      player.yellow++;
-
-    }else{
-
-      player.red++;
-
-    }
-
-  }
-
-  match.events.push({
-
-    type:"card",
-
-    player:playerName,
-
-    card:card,
-
-    minute:minute
-
-  });
-
-  document.getElementById("cardMinute").value="";
-
-  saveData();
-  renderAll();
-
-}
-
-
-/* =========================================================
-   SUBSTITUTIONS
-   ========================================================= */
-
-function addSubstitution(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  const out =
-    document.getElementById("subOut")
-      .value.trim();
-
-  const incoming =
-    document.getElementById("subIn")
-      .value.trim();
-
-  const minute =
-    document.getElementById("subMinute")
-      .value || "?";
-
-  if(!out || !incoming){
-
-    alert("Enter both players.");
-    return;
-
-  }
-
-  match.events.push({
-
-    type:"substitution",
-
-    out:out,
-
-    incoming:incoming,
-
-    minute:minute
-
-  });
-
-  document.getElementById("subOut").value="";
-  document.getElementById("subIn").value="";
-  document.getElementById("subMinute").value="";
-
-  saveData();
-  renderAll();
-
-}
-
-
-/* =========================================================
-   MAN OF THE MATCH
-   ========================================================= */
-
-function setMOTM(){
-
-  const match =
-    getControlMatch();
-
-  if(!match){
-
-    alert("Choose a match.");
-    return;
-
-  }
-
-  const name =
-    document.getElementById("motmPlayer").value;
-
-  if(!name){
-
-    alert("Choose a player.");
-    return;
-
-  }
-
-  if(match.motm){
-
-    const old =
-      players.find(
-        p=>p.name===match.motm
-      );
-
-    if(old && old.motm>0){
-
-      old.motm--;
-
-    }
-
-  }
-
-  match.motm=name;
-
-  const player =
-    players.find(
-      p=>p.name===name
-    );
-
-  if(player){
-
-    player.motm++;
-
-  }
-
-  saveData();
-  renderAll();
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
@@ -2515,558 +3204,160 @@ function setMOTM(){
 
 function addNews(){
 
-  const title =
-    document.getElementById("newsTitle")
-      .value.trim();
-
-  const body =
-    document.getElementById("newsBody")
-      .value.trim();
-
-  if(!title){
-
-    alert("Enter a headline.");
-    return;
-
-  }
-
-  news.unshift({
-
-    id:Date.now(),
-
-    title:title,
-
-    body:body,
-
-    date:new Date().toLocaleString()
-
-  });
-
-  document.getElementById("newsTitle").value="";
-  document.getElementById("newsBody").value="";
-
-  saveData();
-  renderAll();
-
-  alert("News published!");
-
-}
+    const title =
+        document.getElementById(
+            "newsText"
+        ).value.trim();
 
 
-/* =========================================================
-   MEDIA
-   ========================================================= */
+    const description =
+        document.getElementById(
+            "newsDescription"
+        ).value.trim();
 
-function addMedia(){
 
-  const title =
-    document.getElementById("mediaTitle")
-      .value.trim();
+    if(!title){
 
-  const url =
-    document.getElementById("mediaURL")
-      .value.trim();
+        alert("Enter a news headline.");
 
-  const type =
-    document.getElementById("mediaType").value;
+        return;
 
-  if(!title || !url){
+    }
 
-    alert("Enter a title and URL.");
-    return;
 
-  }
+    news.unshift({
 
-  media.unshift({
+        title:title,
 
-    id:Date.now(),
+        description:description
 
-    title:title,
+    });
 
-    url:url,
 
-    type:type,
+    document.getElementById(
+        "newsText"
+    ).value="";
 
-    date:new Date().toLocaleString()
 
-  });
+    document.getElementById(
+        "newsDescription"
+    ).value="";
 
-  document.getElementById("mediaTitle").value="";
-  document.getElementById("mediaURL").value="";
 
-  saveData();
-  renderAll();
+    saveAll();
 
-  alert("Highlight added!");
+    renderAll();
+
+    toast("📰 News published!");
 
 }
 
 
 /* =========================================================
-   AWARDS
+   HIGHLIGHTS
    ========================================================= */
 
-function saveAwards(){
+function addHighlight(){
 
-  awards.mvp =
-    document.getElementById("awardMVP").value.trim();
+    const title =
+        document.getElementById(
+            "highlightTitle"
+        ).value.trim();
 
-  awards.boot =
-    document.getElementById("awardBoot").value.trim();
 
-  awards.keeper =
-    document.getElementById("awardKeeper").value.trim();
+    const type =
+        document.getElementById(
+            "highlightType"
+        ).value;
 
-  awards.playmaker =
-    document.getElementById("awardPlaymaker").value.trim();
 
-  saveData();
-  renderAll();
+    const url =
+        document.getElementById(
+            "highlightURL"
+        ).value.trim();
 
-  alert("Awards saved!");
+
+    const description =
+        document.getElementById(
+            "highlightDescription"
+        ).value.trim();
+
+
+    if(!title || !url){
+
+        alert(
+            "Enter a title and URL."
+        );
+
+        return;
+
+    }
+
+
+    highlights.unshift({
+
+        title:title,
+
+        type:type,
+
+        url:url,
+
+        description:description
+
+    });
+
+
+    document.getElementById(
+        "highlightTitle"
+    ).value="";
+
+
+    document.getElementById(
+        "highlightURL"
+    ).value="";
+
+
+    document.getElementById(
+        "highlightDescription"
+    ).value="";
+
+
+    saveAll();
+
+    renderAll();
+
+    toast("🎥 Highlight added!");
 
 }
 
 
 /* =========================================================
-   SEASON
+   RENDER EVERYTHING
    ========================================================= */
 
-function changeSeason(){
+function renderAll(){
 
-  const value =
-    document.getElementById("seasonInput")
-      .value.trim();
+    renderHome();
 
-  if(!value){
+    renderPlayers();
 
-    alert("Enter a season name.");
-    return;
+    renderTeams();
 
-  }
+    renderNews();
 
-  season=value;
+    renderGames();
 
-  saveData();
-  renderAll();
+    renderSchedule();
 
-  alert("Season changed!");
+    renderLiveMatches();
 
-}
+    renderResults();
 
+    renderScorers();
 
-/* =========================================================
-   RESET SEASON
-   ========================================================= */
+    renderStandings();
 
-function resetSeason(){
-
-  if(
-    !confirm(
-      "This will remove current matches and reset player statistics. Continue?"
-    )
-  ){
-
-    return;
-
-  }
-
-  matches=[];
-
-  players =
-    players.map(
-      p=>({
-
-        ...p,
-
-        goals:0,
-
-        assists:0,
-
-        yellow:0,
-
-        red:0,
-
-        motm:0
-
-      })
-    );
-
-  saveData();
-  renderAll();
-  populateAdmin();
-
-  alert("Season reset.");
-
-}
-
-
-/* =========================================================
-   EXPORT
-   ========================================================= */
-
-function exportData(){
-
-  const data={
-
-    season,
-
-    teams,
-
-    players,
-
-    matches,
-
-    news,
-
-    media,
-
-    awards,
-
-    seasonHistory
-
-  };
-
-  const blob =
-    new Blob(
-      [JSON.stringify(data,null,2)],
-      {type:"application/json"}
-    );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href=url;
-
-  a.download=
-    "project-mini-field-backup.json";
-
-  a.click();
-
-  URL.revokeObjectURL(url);
-
-}
-
-
-/* =========================================================
-   DELETE EVERYTHING
-   ========================================================= */
-
-function deleteEverything(){
-
-  if(
-    !confirm(
-      "WARNING: This deletes ALL Project Mini Field data. Continue?"
-    )
-  ){
-
-    return;
-
-  }
-
-  localStorage.clear();
-
-  location.reload();
-
-}
-
-
-/* =========================================================
-   MATCH STATUS
-   ========================================================= */
-
-function statusInfo(match){
-
-  if(match.status==="live"){
-
-    return {
-      text:"🔴 LIVE",
-      class:"status-live"
-    };
-
-  }
-
-  if(match.status==="halftime"){
-
-    return {
-      text:"⏸️ HALFTIME",
-      class:"status-half"
-    };
-
-  }
-
-  if(match.status==="finished"){
-
-    return {
-      text:"🏁 FULL TIME",
-      class:"status-finished"
-    };
-
-  }
-
-  return {
-    text:"📅 UPCOMING",
-    class:"status-upcoming"
-  };
-
-}
-
-
-/* =========================================================
-   MATCH TIMER
-   ========================================================= */
-
-function getMatchMinute(match){
-
-  if(!match.startedAt){
-
-    return "";
-
-  }
-
-  if(match.status==="finished"){
-
-    return "90'";
-
-  }
-
-  if(match.status==="halftime"){
-
-    return "45'";
-
-  }
-
-  const elapsed =
-    Date.now()-match.startedAt;
-
-  let minutes =
-    Math.floor(
-      elapsed/60000
-    );
-
-  if(minutes>90){
-
-    minutes=90;
-
-  }
-
-  return minutes+"'";
-
-}
-
-
-/* =========================================================
-   MATCH HTML
-   ========================================================= */
-
-function matchHTML(match){
-
-  const status =
-    statusInfo(match);
-
-  let eventsHTML="";
-
-  if(
-    match.events &&
-    match.events.length
-  ){
-
-    eventsHTML =
-      match.events.map(
-        eventHTML
-      ).join("");
-
-  }
-
-  return `
-
-    <div class="match-card">
-
-      <div class="match-status ${status.class}">
-        ${status.text}
-      </div>
-
-      ${
-        match.status==="live" ||
-        match.status==="halftime"
-        ?
-        `<div class="timer">
-          ${getMatchMinute(match)}
-        </div>`
-        :
-        ""
-      }
-
-      <div class="match-teams">
-
-        ${escapeHTML(match.home)}
-
-        <div class="match-score">
-
-          ${match.homeScore}
-          -
-          ${match.awayScore}
-
-        </div>
-
-        ${escapeHTML(match.away)}
-
-      </div>
-
-      <div class="match-date">
-
-        📅 ${escapeHTML(match.date)}
-        &nbsp;
-        ⏰ ${escapeHTML(match.time)}
-
-      </div>
-
-      ${
-        match.motm
-        ?
-        `<p style="text-align:center;margin-top:10px">
-          ⭐ Man of the Match:
-          <b>${escapeHTML(match.motm)}</b>
-        </p>`
-        :
-        ""
-      }
-
-      ${
-        eventsHTML
-        ?
-        `
-        <div class="event-list">
-
-          <b>Match Events</b>
-
-          ${eventsHTML}
-
-        </div>
-        `
-        :
-        ""
-      }
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   EVENT HTML
-   ========================================================= */
-
-function eventHTML(event){
-
-  if(event.type==="goal"){
-
-    return `
-      <div class="event">
-
-        ⚽
-        <b>${escapeHTML(event.minute)}'</b>
-
-        ${escapeHTML(event.scorer)}
-
-        ${
-          event.assist
-          ?
-          `🎯 ${escapeHTML(event.assist)}`
-          :
-          ""
-        }
-
-      </div>
-    `;
-
-  }
-
-  if(event.type==="card"){
-
-    return `
-      <div class="event">
-
-        ${
-          event.card==="yellow"
-          ?
-          "🟨"
-          :
-          "🟥"
-        }
-
-        <b>${escapeHTML(event.minute)}'</b>
-
-        ${escapeHTML(event.player)}
-
-      </div>
-    `;
-
-  }
-
-  if(event.type==="substitution"){
-
-    return `
-      <div class="event">
-
-        🔄
-        <b>${escapeHTML(event.minute)}'</b>
-
-        ${escapeHTML(event.out)}
-        →
-        ${escapeHTML(event.incoming)}
-
-      </div>
-    `;
-
-  }
-
-  if(event.type==="halftime"){
-
-    return `
-      <div class="event">
-        ⏸️ HALFTIME
-      </div>
-    `;
-
-  }
-
-  if(event.type==="secondhalf"){
-
-    return `
-      <div class="event">
-        ▶️ SECOND HALF
-      </div>
-    `;
-
-  }
-
-  if(event.type==="fulltime"){
-
-    return `
-      <div class="event">
-        🏁 FULL TIME
-      </div>
-    `;
-
-  }
-
-  if(event.type==="start"){
-
-    return `
-      <div class="event">
-        🔴 MATCH STARTED
-      </div>
-    `;
-
-  }
-
-  return "";
+    renderHighlights();
 
 }
 
@@ -3077,175 +3368,87 @@ function eventHTML(event){
 
 function renderHome(){
 
-  document.getElementById(
-    "seasonDisplay"
-  ).textContent=season;
+    document.getElementById(
+        "homeMatches"
+    ).textContent =
+        fixtures.length;
 
-  const live =
-    matches.find(
-      m=>
-        m.status==="live" ||
-        m.status==="halftime"
-    );
-
-  const upcoming =
-    matches.find(
-      m=>m.status==="upcoming"
-    );
-
-  const homeMatch =
-    document.getElementById("homeMatch");
-
-  if(live){
-
-    homeMatch.innerHTML=
-      matchHTML(live);
-
-  }else if(upcoming){
-
-    homeMatch.innerHTML=
-      matchHTML(upcoming);
-
-  }else{
-
-    homeMatch.innerHTML=
-      `<div class="empty">
-        No matches scheduled.
-      </div>`;
-
-  }
-
-  document.getElementById(
-    "homeNews"
-  ).innerHTML=
-
-    news
-      .slice(0,3)
-      .map(
-        item=>
-        `
-        <div class="item">
-
-          <b>📰 ${escapeHTML(item.title)}</b>
-
-          ${
-            item.body
-            ?
-            `<p style="margin-top:5px">
-              ${escapeHTML(item.body)}
-            </p>`
-            :
-            ""
-          }
-
-          <div class="small-text">
-            ${escapeHTML(item.date)}
-          </div>
-
-        </div>
-        `
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No news yet.
-      </div>`;
-
-  const table =
-    calculateStandings();
-
-  if(table.length){
-
-    const leader=table[0];
 
     document.getElementById(
-      "homeLeader"
-    ).innerHTML=
+        "homeTeams"
+    ).textContent =
+        teams.length;
 
-      `
-      <div class="item">
-
-        🥇
-        <strong>
-          ${escapeHTML(leader.team)}
-        </strong>
-
-        <br>
-
-        ${leader.points} points
-        &nbsp;•&nbsp;
-        ${leader.wins} wins
-
-      </div>
-      `;
-
-  }else{
 
     document.getElementById(
-      "homeLeader"
-    ).innerHTML=
-      `<div class="empty">
-        No standings yet.
-      </div>`;
-
-  }
-
-}
+        "homePlayers"
+    ).textContent =
+        players.length;
 
 
-/* =========================================================
-   LIVE
-   ========================================================= */
-
-function renderLive(){
-
-  const live =
-    matches.filter(
-      m=>
-        m.status==="live" ||
-        m.status==="halftime"
-    );
-
-  document.getElementById(
-    "liveMatches"
-  ).innerHTML=
-
-    live
-      .map(matchHTML)
-      .join("")
-      ||
-      `<div class="empty">
-        🔴 No live matches right now.
-      </div>`;
-
-}
+    const liveBox =
+        document.getElementById(
+            "homeLive"
+        );
 
 
-/* =========================================================
-   RESULTS
-   ========================================================= */
+    const live =
+        fixtures.filter(
+            match=>
+                match.status==="live" ||
+                match.status==="halftime"
+        );
 
-function renderResults(){
 
-  const results =
-    matches
-      .filter(
-        m=>m.status==="finished"
-      )
-      .slice()
-      .reverse();
+    if(live.length===0){
 
-  document.getElementById(
-    "results"
-  ).innerHTML=
+        liveBox.innerHTML =
+            '<div class="empty">No live match right now.</div>';
 
-    results
-      .map(matchHTML)
-      .join("")
-      ||
-      `<div class="empty">
-        No completed matches yet.
-      </div>`;
+    }else{
+
+        liveBox.innerHTML =
+            renderMatchCard(live[0]);
+
+    }
+
+
+    const newsBox =
+        document.getElementById(
+            "homeNews"
+        );
+
+
+    if(news.length===0){
+
+        newsBox.innerHTML =
+            '<div class="empty">No news yet.</div>';
+
+    }else{
+
+        const item=news[0];
+
+        newsBox.innerHTML=`
+
+            <div class="news-item">
+
+                <b>
+                📰 ${escapeHTML(item.title)}
+                </b>
+
+                ${
+                    item.description
+                    ? `<p style="color:#64748b;margin-top:6px;">
+                    ${escapeHTML(item.description)}
+                    </p>`
+                    : ""
+                }
+
+            </div>
+
+        `;
+
+    }
 
 }
 
@@ -3256,142 +3459,43 @@ function renderResults(){
 
 function renderPlayers(){
 
-  const query =
-    (
-      document.getElementById(
-        "playerSearch"
-      )?.value || ""
-    ).toLowerCase();
+    const box =
+        document.getElementById(
+            "playersList"
+        );
 
-  const filtered =
-    players.filter(
-      p=>
-        p.name
-          .toLowerCase()
-          .includes(query)
-    );
 
-  document.getElementById(
-    "playersList"
-  ).innerHTML=
+    if(players.length===0){
 
-    filtered
-      .map(
-        player=>
-        `
-        <div class="player-card">
+        box.innerHTML =
+            '<div class="empty">No players added yet.</div>';
 
-          <div class="rank">
-            👤 ${escapeHTML(player.name)}
-          </div>
+        return;
 
-          <br>
+    }
 
-          ⚽ Goals:
-          <b>${player.goals}</b>
 
-          &nbsp; • &nbsp;
+    box.innerHTML =
+        players
+        .map(player=>`
 
-          🎯 Assists:
-          <b>${player.assists}</b>
+            <div class="player">
 
-          <br><br>
+                👤
 
-          ⭐ MOTM:
-          ${player.motm}
+                <b>
+                ${escapeHTML(player.name)}
+                </b>
 
-          &nbsp; 🟨 ${player.yellow}
+                <br>
 
-          &nbsp; 🟥 ${player.red}
+                ⚽ Goals:
+                ${Number(player.goals || 0)}
 
-        </div>
-        `
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No players found.
-      </div>`;
+            </div>
 
-  const scorers =
-    players
-      .slice()
-      .sort(
-        (a,b)=>b.goals-a.goals
-      );
-
-  document.getElementById(
-    "topScorers"
-  ).innerHTML=
-
-    scorers
-      .slice(0,10)
-      .map(
-        (player,index)=>
-        `
-        <div class="item">
-
-          <b>
-            ${
-              index===0
-              ?
-              "👑"
-              :
-              "#"+(index+1)
-            }
-
-            ${escapeHTML(player.name)}
-
-          </b>
-
-          <span style="float:right">
-            ⚽ ${player.goals}
-          </span>
-
-        </div>
-        `
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No goals yet.
-      </div>`;
-
-  const assists =
-    players
-      .slice()
-      .sort(
-        (a,b)=>b.assists-a.assists
-      );
-
-  document.getElementById(
-    "topAssists"
-  ).innerHTML=
-
-    assists
-      .slice(0,10)
-      .map(
-        (player,index)=>
-        `
-        <div class="item">
-
-          <b>
-            #${index+1}
-            ${escapeHTML(player.name)}
-          </b>
-
-          <span style="float:right">
-            🎯 ${player.assists}
-          </span>
-
-        </div>
-        `
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No assists yet.
-      </div>`;
+        `)
+        .join("");
 
 }
 
@@ -3402,333 +3506,38 @@ function renderPlayers(){
 
 function renderTeams(){
 
-  document.getElementById(
-    "teamsList"
-  ).innerHTML=
-
-    teams
-      .map(
-        team=>{
-
-          const games =
-            matches.filter(
-              m=>
-                m.status==="finished" &&
-                (
-                  m.home===team ||
-                  m.away===team
-                )
-            );
-
-          let gf=0;
-          let ga=0;
-
-          games.forEach(
-            m=>{
-
-              if(m.home===team){
-
-                gf+=m.homeScore;
-                ga+=m.awayScore;
-
-              }else{
-
-                gf+=m.awayScore;
-                ga+=m.homeScore;
-
-              }
-
-            }
-          );
-
-          return `
-            <div class="player-card">
-
-              <h3>
-                ⚽ ${escapeHTML(team)}
-              </h3>
-
-              Games:
-              <b>${games.length}</b>
-
-              <br>
-
-              Goals For:
-              <b>${gf}</b>
-
-              <br>
-
-              Goals Against:
-              <b>${ga}</b>
-
-            </div>
-          `;
-
-        }
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No teams.
-      </div>`;
-
-}
+    const box =
+        document.getElementById(
+            "teamsList"
+        );
 
 
-/* =========================================================
-   STANDINGS CALCULATION
-   ========================================================= */
+    if(teams.length===0){
 
-function calculateStandings(){
+        box.innerHTML =
+            '<div class="empty">No teams yet.</div>';
 
-  const table={};
-
-  teams.forEach(
-    team=>{
-
-      table[team]={
-
-        team:team,
-
-        played:0,
-
-        wins:0,
-
-        draws:0,
-
-        losses:0,
-
-        goalsFor:0,
-
-        goalsAgainst:0,
-
-        points:0
-
-      };
+        return;
 
     }
-  );
-
-  matches
-    .filter(
-      m=>m.status==="finished"
-    )
-    .forEach(
-      match=>{
-
-        if(!table[match.home]){
-
-          table[match.home]={
-
-            team:match.home,
-            played:0,
-            wins:0,
-            draws:0,
-            losses:0,
-            goalsFor:0,
-            goalsAgainst:0,
-            points:0
-
-          };
-
-        }
-
-        if(!table[match.away]){
-
-          table[match.away]={
-
-            team:match.away,
-            played:0,
-            wins:0,
-            draws:0,
-            losses:0,
-            goalsFor:0,
-            goalsAgainst:0,
-            points:0
-
-          };
-
-        }
-
-        const home =
-          table[match.home];
-
-        const away =
-          table[match.away];
-
-        home.played++;
-        away.played++;
-
-        home.goalsFor +=
-          match.homeScore;
-
-        home.goalsAgainst +=
-          match.awayScore;
-
-        away.goalsFor +=
-          match.awayScore;
-
-        away.goalsAgainst +=
-          match.homeScore;
-
-        if(
-          match.homeScore >
-          match.awayScore
-        ){
-
-          home.wins++;
-          home.points+=3;
-          away.losses++;
-
-        }else if(
-          match.awayScore >
-          match.homeScore
-        ){
-
-          away.wins++;
-          away.points+=3;
-          home.losses++;
-
-        }else{
-
-          home.draws++;
-          away.draws++;
-
-          home.points++;
-          away.points++;
-
-        }
-
-      }
-    );
-
-  return Object
-    .values(table)
-    .sort(
-      (a,b)=>
-
-        b.points-a.points ||
-
-        (
-          (b.goalsFor-b.goalsAgainst) -
-          (a.goalsFor-a.goalsAgainst)
-        ) ||
-
-        b.goalsFor-a.goalsFor
-    );
-
-}
 
 
-/* =========================================================
-   RENDER STANDINGS
-   ========================================================= */
+    box.innerHTML =
+        teams
+        .map(team=>`
 
-function renderStandings(){
+            <div class="team">
 
-  const table =
-    calculateStandings();
+                ⚽
 
-  document.getElementById(
-    "standingsTable"
-  ).innerHTML=
+                <b>
+                ${escapeHTML(team)}
+                </b>
 
-    table.length
-    ?
+            </div>
 
-    `
-    <table>
-
-      <tr>
-
-        <th>#</th>
-        <th>Team</th>
-        <th>P</th>
-        <th>W</th>
-        <th>D</th>
-        <th>L</th>
-        <th>GD</th>
-        <th>PTS</th>
-
-      </tr>
-
-      ${
-        table.map(
-          (team,index)=>
-          `
-          <tr>
-
-            <td>
-              ${
-                index===0
-                ?
-                "🥇"
-                :
-                index+1
-              }
-            </td>
-
-            <td>
-              <b>
-                ${escapeHTML(team.team)}
-              </b>
-            </td>
-
-            <td>${team.played}</td>
-            <td>${team.wins}</td>
-            <td>${team.draws}</td>
-            <td>${team.losses}</td>
-
-            <td>
-              ${
-                team.goalsFor-
-                team.goalsAgainst
-              }
-            </td>
-
-            <td>
-              <b>${team.points}</b>
-            </td>
-
-          </tr>
-          `
-        ).join("")
-      }
-
-    </table>
-    `
-
-    :
-
-    `<div class="empty">
-      Finish some matches to build the table.
-    </div>`;
-
-}
-
-
-/* =========================================================
-   FIXTURES
-   ========================================================= */
-
-function renderFixtures(){
-
-  const fixtures =
-    matches.filter(
-      m=>m.status==="upcoming"
-    );
-
-  document.getElementById(
-    "fixturesList"
-  ).innerHTML=
-
-    fixtures
-      .map(matchHTML)
-      .join("")
-      ||
-      `<div class="empty">
-        📅 No upcoming fixtures.
-      </div>`;
+        `)
+        .join("");
 
 }
 
@@ -3739,619 +3548,915 @@ function renderFixtures(){
 
 function renderNews(){
 
-  document.getElementById(
-    "newsList"
-  ).innerHTML=
-
-    news
-      .map(
-        item=>
-        `
-        <div class="item highlight">
-
-          <h3>
-            📰 ${escapeHTML(item.title)}
-          </h3>
-
-          ${
-            item.body
-            ?
-            `<p>
-              ${escapeHTML(item.body)}
-            </p>`
-            :
-            ""
-          }
-
-          <br>
-
-          <span class="small-text">
-            ${escapeHTML(item.date)}
-          </span>
-
-        </div>
-        `
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No news yet.
-      </div>`;
-
-}
-
-
-/* =========================================================
-   MEDIA
-   ========================================================= */
-
-function renderMedia(){
-
-  document.getElementById(
-    "mediaList"
-  ).innerHTML=
-
-    media
-      .map(
-        item=>{
-
-          if(item.type==="video"){
-
-            return `
-              <div class="item">
-
-                <h3>
-                  🎥 ${escapeHTML(item.title)}
-                </h3>
-
-                <video
-                  class="media-video"
-                  controls
-                  src="${escapeHTML(item.url)}">
-                </video>
-
-                <div class="small-text">
-                  ${escapeHTML(item.date)}
-                </div>
-
-              </div>
-            `;
-
-          }
-
-          return `
-            <div class="item">
-
-              <h3>
-                📸 ${escapeHTML(item.title)}
-              </h3>
-
-              <img
-                class="media-image"
-                src="${escapeHTML(item.url)}"
-                alt="${escapeHTML(item.title)}"
-              >
-
-              <div class="small-text">
-                ${escapeHTML(item.date)}
-              </div>
-
-            </div>
-          `;
-
-        }
-      )
-      .join("")
-      ||
-      `<div class="empty">
-        No highlights yet.
-      </div>`;
-
-}
-
-
-/* =========================================================
-   STATISTICS
-   ========================================================= */
-
-function renderStatistics(){
-
-  const finished =
-    matches.filter(
-      m=>m.status==="finished"
-    );
-
-  let totalGoals=0;
-
-  finished.forEach(
-    m=>{
-      totalGoals +=
-        m.homeScore+
-        m.awayScore;
-    }
-  );
-
-  const average =
-    finished.length
-    ?
-    (totalGoals/finished.length)
-      .toFixed(1)
-    :
-    "0";
-
-  const scorer =
-    players
-      .slice()
-      .sort(
-        (a,b)=>b.goals-a.goals
-      )[0];
-
-  const assistLeader =
-    players
-      .slice()
-      .sort(
-        (a,b)=>b.assists-a.assists
-      )[0];
-
-  let biggest=null;
-  let biggestDifference=-1;
-
-  finished.forEach(
-    m=>{
-
-      const difference =
-        Math.abs(
-          m.homeScore-
-          m.awayScore
+    const box =
+        document.getElementById(
+            "newsList"
         );
 
-      if(difference>biggestDifference){
 
-        biggestDifference=difference;
-        biggest=m;
+    if(news.length===0){
 
-      }
+        box.innerHTML =
+            '<div class="empty">No news yet.</div>';
+
+        return;
 
     }
-  );
 
-  document.getElementById(
-    "statistics"
-  ).innerHTML=
 
-    `
-    <div class="grid">
+    box.innerHTML =
+        news
+        .map(item=>`
 
-      <div class="stat-box">
-        <strong>${finished.length}</strong>
-        Matches
-      </div>
+            <div class="news-item">
 
-      <div class="stat-box">
-        <strong>${totalGoals}</strong>
-        Goals
-      </div>
+                <b>
+                📰 ${escapeHTML(item.title)}
+                </b>
 
-      <div class="stat-box">
-        <strong>${average}</strong>
-        Goals/Game
-      </div>
+                ${
+                    item.description
+                    ? `<p style="
+                    color:#64748b;
+                    margin-top:7px;
+                    line-height:1.5;
+                    ">
+                    ${escapeHTML(item.description)}
+                    </p>`
+                    : ""
+                }
 
-      <div class="stat-box">
-        <strong>${players.length}</strong>
-        Players
-      </div>
+            </div>
 
-    </div>
+        `)
+        .join("");
 
-    <br>
+}
 
-    <div class="item">
 
-      👑 Top Scorer:
+/* =========================================================
+   GAMES
+   ========================================================= */
 
-      <b>
-        ${
-          scorer
-          ?
-          escapeHTML(scorer.name)
-          :
-          "None"
+function renderGames(){
+
+    const box =
+        document.getElementById(
+            "gamesList"
+        );
+
+
+    if(fixtures.length===0){
+
+        box.innerHTML =
+            '<div class="empty">No games yet.</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        fixtures
+        .map(match=>`
+
+            <div class="fixture">
+
+                ⚽
+
+                <b>
+                ${escapeHTML(match.home)}
+                </b>
+
+                ${match.homeScore}
+
+                -
+
+                ${match.awayScore}
+
+                <b>
+                ${escapeHTML(match.away)}
+                </b>
+
+                <br>
+
+                📅
+                ${escapeHTML(match.date)}
+
+                at
+
+                ⏰
+                ${escapeHTML(match.time)}
+
+                <br>
+
+                ${statusText(match.status)}
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   SCHEDULE
+   ========================================================= */
+
+function renderSchedule(){
+
+    const box =
+        document.getElementById(
+            "scheduleList"
+        );
+
+
+    const upcoming =
+        fixtures.filter(
+            match=>match.status!=="final"
+        );
+
+
+    if(upcoming.length===0){
+
+        box.innerHTML =
+            '<div class="empty">No upcoming matches.</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        upcoming
+        .map(match=>`
+
+            <div class="fixture">
+
+                📅
+
+                <b>
+                ${escapeHTML(match.date)}
+                </b>
+
+                <br>
+
+                ⏰
+                ${escapeHTML(match.time)}
+
+                <br><br>
+
+                ⚽
+
+                <b>
+                ${escapeHTML(match.home)}
+                </b>
+
+                vs
+
+                <b>
+                ${escapeHTML(match.away)}
+                </b>
+
+                <br>
+
+                ${statusText(match.status)}
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   LIVE
+   ========================================================= */
+
+function renderLiveMatches(){
+
+    const box =
+        document.getElementById(
+            "liveMatches"
+        );
+
+
+    const live =
+        fixtures.filter(
+            match=>
+                match.status==="live" ||
+                match.status==="halftime"
+        );
+
+
+    if(live.length===0){
+
+        box.innerHTML =
+            '<div class="empty">No live matches right now.</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        live
+        .map(match=>renderMatchCard(match))
+        .join("");
+
+}
+
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+
+function renderResults(){
+
+    const box =
+        document.getElementById(
+            "resultsList"
+        );
+
+
+    const results =
+        fixtures.filter(
+            match=>match.status==="final"
+        );
+
+
+    if(results.length===0){
+
+        box.innerHTML =
+            '<div class="empty">No completed matches yet.</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        results
+        .slice()
+        .reverse()
+        .map(match=>renderMatchCard(match))
+        .join("");
+
+}
+
+
+/* =========================================================
+   MATCH CARD
+   ========================================================= */
+
+function renderMatchCard(match){
+
+    let statusClass="status-scheduled";
+
+    if(match.status==="live"){
+
+        statusClass="status-live";
+
+    }
+
+    if(match.status==="halftime"){
+
+        statusClass="status-half";
+
+    }
+
+    if(match.status==="final"){
+
+        statusClass="status-final";
+
+    }
+
+
+    return `
+
+        <div class="match-card">
+
+            <div class="match-status ${statusClass}">
+
+                ${statusText(match.status)}
+
+            </div>
+
+            <div class="match-teams">
+
+                <div class="match-team">
+
+                    ${escapeHTML(match.home)}
+
+                </div>
+
+                <div class="match-score">
+
+                    ${match.homeScore}
+
+                    -
+
+                    ${match.awayScore}
+
+                </div>
+
+                <div class="match-team">
+
+                    ${escapeHTML(match.away)}
+
+                </div>
+
+            </div>
+
+            <div class="match-date">
+
+                📅
+                ${escapeHTML(match.date)}
+
+                &nbsp;
+
+                ⏰
+                ${escapeHTML(match.time)}
+
+            </div>
+
+            ${renderGoals(match)}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   GOALS DISPLAY
+   ========================================================= */
+
+function renderGoals(match){
+
+    if(!match.goals || match.goals.length===0){
+
+        return "";
+
+    }
+
+
+    return `
+
+        <div class="goal-list">
+
+            <div class="goal-list-title">
+                ⚽ Goals
+            </div>
+
+            ${match.goals.map(goal=>`
+
+                <div class="goal-item">
+
+                    ⚽
+
+                    <b>
+                    ${escapeHTML(goal.player)}
+                    </b>
+
+                    —
+
+                    ${escapeHTML(goal.team)}
+
+                    ${
+                        goal.timestamp
+                        ? `<span style="color:#64748b;">
+                        (${escapeHTML(goal.timestamp)})
+                        </span>`
+                        : ""
+                    }
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   TOP SCORERS
+   ========================================================= */
+
+function renderScorers(){
+
+    const box =
+        document.getElementById(
+            "scorersList"
+        );
+
+
+    const sorted =
+        players
+        .slice()
+        .sort(
+            (a,b)=>
+                Number(b.goals||0) -
+                Number(a.goals||0)
+        );
+
+
+    if(sorted.length===0){
+
+        box.innerHTML =
+            '<div class="empty">No players yet.</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        sorted
+        .map((player,index)=>`
+
+            <div class="scorer">
+
+                <div class="scorer-rank">
+
+                    ${index+1}
+
+                </div>
+
+                <div class="scorer-name">
+
+                    ${escapeHTML(player.name)}
+
+                </div>
+
+                <div class="goal-count">
+
+                    ${Number(player.goals||0)}
+
+                    ⚽
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   STANDINGS
+   ========================================================= */
+
+function renderStandings(){
+
+    const box =
+        document.getElementById(
+            "standingsList"
+        );
+
+
+    const table={};
+
+
+    teams.forEach(team=>{
+
+        table[team]={
+
+            team:team,
+
+            played:0,
+
+            wins:0,
+
+            draws:0,
+
+            losses:0,
+
+            gf:0,
+
+            ga:0,
+
+            points:0
+
+        };
+
+    });
+
+
+    fixtures
+    .filter(
+        match=>match.status==="final"
+    )
+    .forEach(match=>{
+
+        if(!table[match.home]){
+
+            table[match.home]={
+
+                team:match.home,
+                played:0,
+                wins:0,
+                draws:0,
+                losses:0,
+                gf:0,
+                ga:0,
+                points:0
+
+            };
+
         }
-      </b>
 
-    </div>
 
-    <div class="item">
+        if(!table[match.away]){
 
-      🎯 Assist Leader:
+            table[match.away]={
 
-      <b>
-        ${
-          assistLeader
-          ?
-          escapeHTML(assistLeader.name)
-          :
-          "None"
-        }
-      </b>
+                team:match.away,
+                played:0,
+                wins:0,
+                draws:0,
+                losses:0,
+                gf:0,
+                ga:0,
+                points:0
 
-    </div>
+            };
 
-    <div class="item">
-
-      🔥 Biggest Win:
-
-      <b>
-
-        ${
-          biggest
-          ?
-          `${escapeHTML(biggest.home)}
-          ${biggest.homeScore}
-          -
-          ${biggest.awayScore}
-          ${escapeHTML(biggest.away)}`
-          :
-          "None"
         }
 
-      </b>
 
-    </div>
-    `;
+        const home =
+            table[match.home];
 
-}
-
-
-/* =========================================================
-   AWARDS
-   ========================================================= */
-
-function renderAwards(){
-
-  document.getElementById(
-    "awardsList"
-  ).innerHTML=
-
-    `
-    <div class="award">
-      🏆 <b>MVP</b><br>
-      ${escapeHTML(awards.mvp||"Not selected")}
-    </div>
-
-    <div class="award">
-      👑 <b>Golden Boot</b><br>
-      ${escapeHTML(awards.boot||"Not selected")}
-    </div>
-
-    <div class="award">
-      🧤 <b>Best Keeper</b><br>
-      ${escapeHTML(awards.keeper||"Not selected")}
-    </div>
-
-    <div class="award">
-      🎯 <b>Best Playmaker</b><br>
-      ${escapeHTML(awards.playmaker||"Not selected")}
-    </div>
-    `;
-
-}
+        const away =
+            table[match.away];
 
 
-/* =========================================================
-   MATCHDAY
-   ========================================================= */
+        home.played++;
 
-function renderMatchday(){
+        away.played++;
 
-  const live =
-    matches.filter(
-      m=>
-        m.status==="live" ||
-        m.status==="halftime"
-    );
 
-  const upcoming =
-    matches.filter(
-      m=>m.status==="upcoming"
-    );
+        home.gf += Number(match.homeScore);
 
-  const finished =
-    matches
-      .filter(
-        m=>m.status==="finished"
-      )
-      .slice()
-      .reverse();
+        home.ga += Number(match.awayScore);
 
-  document.getElementById(
-    "matchday"
-  ).innerHTML=
 
-    `
+        away.gf += Number(match.awayScore);
 
-    <h3>🔴 Live</h3>
+        away.ga += Number(match.homeScore);
 
-    ${
-      live.map(matchHTML).join("")
-      ||
-      "<p>No live matches.</p>"
+
+        if(match.homeScore > match.awayScore){
+
+            home.wins++;
+
+            home.points+=3;
+
+            away.losses++;
+
+        }
+
+
+        else if(
+            match.homeScore <
+            match.awayScore
+        ){
+
+            away.wins++;
+
+            away.points+=3;
+
+            home.losses++;
+
+        }
+
+
+        else{
+
+            home.draws++;
+
+            away.draws++;
+
+            home.points++;
+
+            away.points++;
+
+        }
+
+    });
+
+
+    const rows =
+        Object.values(table)
+        .sort((a,b)=>{
+
+            if(b.points!==a.points){
+
+                return b.points-a.points;
+
+            }
+
+            const gdA=a.gf-a.ga;
+
+            const gdB=b.gf-b.ga;
+
+            if(gdB!==gdA){
+
+                return gdB-gdA;
+
+            }
+
+            return b.gf-a.gf;
+
+        });
+
+
+    if(rows.length===0){
+
+        box.innerHTML="";
+
+        return;
+
     }
 
-    <br>
 
-    <h3>📅 Upcoming</h3>
+    box.innerHTML =
+        rows
+        .map((team,index)=>`
 
-    ${
-      upcoming
-        .slice(0,3)
-        .map(matchHTML)
-        .join("")
-      ||
-      "<p>No upcoming matches.</p>"
+            <tr>
+
+                <td>
+
+                    <b>
+                    ${index+1}.
+                    ${escapeHTML(team.team)}
+                    </b>
+
+                </td>
+
+                <td>
+                ${team.played}
+                </td>
+
+                <td>
+                ${team.wins}
+                </td>
+
+                <td>
+                ${team.draws}
+                </td>
+
+                <td>
+                ${team.losses}
+                </td>
+
+                <td>
+                ${team.gf}
+                </td>
+
+                <td>
+                ${team.ga}
+                </td>
+
+                <td>
+                ${team.gf-team.ga}
+                </td>
+
+                <td>
+
+                    <b>
+                    ${team.points}
+                    </b>
+
+                </td>
+
+            </tr>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   HIGHLIGHTS
+   ========================================================= */
+
+function renderHighlights(){
+
+    const box =
+        document.getElementById(
+            "highlightsList"
+        );
+
+
+    if(highlights.length===0){
+
+        box.innerHTML =
+            '<div class="empty">No photos or videos yet.</div>';
+
+        return;
+
     }
 
-    <br>
 
-    <h3>🏁 Latest Results</h3>
+    box.innerHTML =
+        highlights
+        .map(item=>{
 
-    ${
-      finished
-        .slice(0,3)
-        .map(matchHTML)
-        .join("")
-      ||
-      "<p>No results.</p>"
+            if(item.type==="video"){
+
+                return `
+
+                    <div class="highlight">
+
+                        <video
+                        controls
+                        src="${escapeHTML(item.url)}">
+                        </video>
+
+                        <div class="highlight-info">
+
+                            <h3>
+                            🎥
+                            ${escapeHTML(item.title)}
+                            </h3>
+
+                            <p>
+                            ${escapeHTML(item.description || "")}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <div class="highlight">
+
+                    <img
+                    src="${escapeHTML(item.url)}"
+                    alt="${escapeHTML(item.title)}">
+
+                    <div class="highlight-info">
+
+                        <h3>
+                        📸
+                        ${escapeHTML(item.title)}
+                        </h3>
+
+                        <p>
+                        ${escapeHTML(item.description || "")}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        })
+        .join("");
+
+}
+
+
+/* =========================================================
+   STATUS TEXT
+   ========================================================= */
+
+function statusText(status){
+
+    if(status==="live"){
+
+        return "🔴 LIVE";
+
     }
 
-    `;
+    if(status==="halftime"){
 
-}
+        return "⏸️ HALFTIME";
 
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-function renderHistory(){
-
-  document.getElementById(
-    "history"
-  ).innerHTML=
-
-    `
-
-    <div class="item">
-
-      📚 Current Season:
-
-      <b>
-        ${escapeHTML(season)}
-      </b>
-
-    </div>
-
-    ${
-      seasonHistory
-        .map(
-          item=>
-          `
-          <div class="item">
-
-            🏆
-            <b>
-              ${escapeHTML(item.season)}
-            </b>
-
-            <br>
-
-            Champion:
-            ${escapeHTML(item.champion||"Not recorded")}
-
-            <br>
-
-            Golden Boot:
-            ${escapeHTML(item.boot||"Not recorded")}
-
-          </div>
-          `
-        )
-        .join("")
-      ||
-      `<div class="empty">
-        No previous seasons recorded.
-      </div>`
     }
 
-    `;
+    if(status==="final"){
+
+        return "🏁 FULL TIME";
+
+    }
+
+    return "📅 SCHEDULED";
 
 }
 
 
 /* =========================================================
-   ADMIN DROPDOWNS
+   ESCAPE HTML
    ========================================================= */
 
-function populateAdmin(){
+function escapeHTML(text){
 
-  const matchOptions =
-
-    `<option value="">
-      Select match
-    </option>`+
-
-    matches
-      .map(
-        match=>
-        `
-        <option value="${match.id}">
-          ${escapeHTML(match.home)}
-          vs
-          ${escapeHTML(match.away)}
-          —
-          ${escapeHTML(match.status)}
-        </option>
-        `
-      )
-      .join("");
-
-  document.getElementById(
-    "editMatchSelect"
-  ).innerHTML=matchOptions;
-
-  document.getElementById(
-    "controlMatch"
-  ).innerHTML=matchOptions;
-
-  document.getElementById(
-    "removePlayerSelect"
-  ).innerHTML=
-
-    `<option value="">
-      Remove player
-    </option>`+
-
-    players
-      .map(
-        p=>
-        `<option value="${escapeHTML(p.name)}">
-          ${escapeHTML(p.name)}
-        </option>`
-      )
-      .join("");
-
-  document.getElementById(
-    "removeTeamSelect"
-  ).innerHTML=
-
-    `<option value="">
-      Remove team
-    </option>`+
-
-    teams
-      .map(
-        team=>
-        `<option value="${escapeHTML(team)}">
-          ${escapeHTML(team)}
-        </option>`
-      )
-      .join("");
-
-  document.getElementById(
-    "goalTeam"
-  ).innerHTML=
-
-    `<option value="">
-      Select team
-    </option>`+
-
-    teams
-      .map(
-        team=>
-        `<option value="${escapeHTML(team)}">
-          ${escapeHTML(team)}
-        </option>`
-      )
-      .join("");
-
-  const playerOptions=
-
-    `<option value="">
-      Select player
-    </option>`+
-
-    players
-      .map(
-        p=>
-        `<option value="${escapeHTML(p.name)}">
-          ${escapeHTML(p.name)}
-        </option>`
-      )
-      .join("");
-
-  document.getElementById(
-    "cardPlayer"
-  ).innerHTML=playerOptions;
-
-  document.getElementById(
-    "motmPlayer"
-  ).innerHTML=playerOptions;
-
-  updateGoalPlayers();
-
-  document.getElementById(
-    "awardMVP"
-  ).value=awards.mvp||"";
-
-  document.getElementById(
-    "awardBoot"
-  ).value=awards.boot||"";
-
-  document.getElementById(
-    "awardKeeper"
-  ).value=awards.keeper||"";
-
-  document.getElementById(
-    "awardPlaymaker"
-  ).value=awards.playmaker||"";
-
-  document.getElementById(
-    "seasonInput"
-  ).value=season;
+    return String(text ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================================================
-   MASTER RENDER
+   REFRESH
    ========================================================= */
 
-function renderAll(){
+function refreshWebsite(){
 
-  renderHome();
+    renderAll();
 
-  renderLive();
+    updateScoreDropdown();
 
-  renderResults();
+    renderAdminMatches();
 
-  renderPlayers();
-
-  renderTeams();
-
-  renderStandings();
-
-  renderFixtures();
-
-  renderNews();
-
-  renderMedia();
-
-  renderStatistics();
-
-  renderAwards();
-
-  renderMatchday();
-
-  renderHistory();
+    toast("Website refreshed!");
 
 }
 
 
 /* =========================================================
-   STARTUP
+   RESET
    ========================================================= */
 
-saveData();
+function resetData(){
+
+    const confirmation =
+        confirm(
+            "This will erase all Project Mini Field data. Continue?"
+        );
+
+
+    if(!confirmation){
+
+        return;
+
+    }
+
+
+    localStorage.removeItem("pmfTeams");
+
+    localStorage.removeItem("pmfPlayers");
+
+    localStorage.removeItem("pmfFixtures");
+
+    localStorage.removeItem("pmfNews");
+
+    localStorage.removeItem("pmfHighlights");
+
+
+    location.reload();
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
 
 renderAll();
 
-setInterval(
-  ()=>{
-    renderAll();
-  },
-  1000
-);
+updateScoreDropdown();
+
+renderAdminMatches();
+
+
+/* =========================================================
+   AUTO REFRESH DISPLAY
+   ========================================================= */
+
+setInterval(()=>{
+
+    renderLiveMatches();
+
+    renderResults();
+
+    renderHome();
+
+},1000);
 
 </script>
 
